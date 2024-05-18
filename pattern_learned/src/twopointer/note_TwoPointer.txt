@@ -1,0 +1,9 @@
+/* https://blog.techbridge.cc/2019/08/30/leetcode-pattern-two-pointer/ */
+總結
+當我們在處理 sorted array 或 sorted linked list，而且需要找到一組滿足特定條件的 element 時，就很可能可以使用 Two pointer 來加快速度。
+
+一組 element 可以是：
+
+●一個 pair		=>	#167
+●3 個 element		=>	#15
+●一個 subarray	=>	#713
