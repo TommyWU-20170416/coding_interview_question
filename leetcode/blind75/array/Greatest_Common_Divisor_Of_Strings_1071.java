@@ -9,7 +9,7 @@ package array;
  */
 public class Greatest_Common_Divisor_Of_Strings_1071 {
     public static void main(String[] args) {
-        Solution s = new Solution();
+        Greatest_Common_Divisor_Of_Strings_1071_Solution s = new Greatest_Common_Divisor_Of_Strings_1071_Solution();
         String gcd1 = s.gcdOfStrings("ABABAB", "ABAB");
         System.out.println("gcd1: " + gcd1);
         String gcd2 = s.gcdOfStrings("ABABABAB", "ABAB");
@@ -23,7 +23,7 @@ public class Greatest_Common_Divisor_Of_Strings_1071 {
     }
 }
 
-class Solution {
+class Greatest_Common_Divisor_Of_Strings_1071_Solution {
     // ------------------ test1 ------------------
     /**
      * <ul>設計思維</ul>
