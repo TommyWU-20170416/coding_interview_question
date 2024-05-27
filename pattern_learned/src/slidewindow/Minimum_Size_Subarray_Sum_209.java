@@ -23,12 +23,12 @@ package slidewindow;
  * Input: target = 15, nums = [1,2,3,4,5]
  * Output: 0
  */
-public class Minimum_Size_Subarray_Sum {
+public class Minimum_Size_Subarray_Sum_209 {
     private static int[] nums = {1, 15, 2, 3, 4};
     private static int target = 15;
 
     public static void main(String[] args) {
-        Minimum_Size_Subarray_Sum test = new Minimum_Size_Subarray_Sum();
+        Minimum_Size_Subarray_Sum_209 test = new Minimum_Size_Subarray_Sum_209();
         System.out.println(test.minSubArrayLen(target, nums));
     }
 
