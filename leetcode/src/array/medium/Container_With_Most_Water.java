@@ -9,7 +9,8 @@ public class Container_With_Most_Water {
 
     public static void main(String[] args) {
         int[] height = {1, 2, 100, 1, 1, 1, 1, 1, 2};
-        System.out.println(maxArea2(height));
+        System.out.println("result:" + maxArea2(height));
+        System.out.println("result:" + maxArea3(height));
     }
 
     /**
@@ -49,7 +50,9 @@ public class Container_With_Most_Water {
      */
     public static int maxArea2(int[] height) {
         int maxarea = 0, l = 0, r = height.length - 1;
+        int count = 0;
         while (l < r) {
+            count++;
             maxarea = Math.max(maxarea, Math.min(height[l], height[r]) * (r - l));
             if (height[l] < height[r]) {
                 l++;
@@ -57,6 +60,24 @@ public class Container_With_Most_Water {
                 r--;
             }
         }
+        System.out.println("count: " + count);
+        return maxarea;
+    }
+
+    /**
+     * 如果接下來的高度沒有比現在高，其實沒有計算的必要，可以減少
+     */
+    public static int maxArea3(int[] height) {
+        int maxarea = 0, l = 0, r = height.length - 1;
+        int count = 0;
+        while (l < r) {
+            count++;
+            int minHeight = Math.min(height[l], height[r]);
+            maxarea = Math.max(maxarea, minHeight * (r - l));
+            while (height[l] <= minHeight && l < r) l++;
+            while (height[r] <= minHeight && l < r) r--;
+        }
+        System.out.println("count: " + count);
         return maxarea;
     }
 }
