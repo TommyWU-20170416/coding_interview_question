@@ -13,11 +13,14 @@ public class Subarray_Sum_Equals_K_560 {
     public static void main(String[] args) {
         Subarray_Sum_Equals_K_560 s = new Subarray_Sum_Equals_K_560();
         Solution solution = s.new Solution();
+        int[] nums = {1};
+        int k = 1;
+
 //        int[] nums = {1, 1, 1};
 //        int k = 2;
 
-        int[] nums = {1, -1, 4, -3, -1};
-        int k = 0;
+//        int[] nums = {1, -1, 4, -3, -1};
+//        int k = 0;
         int result = solution.subarraySum(nums, k);
         System.out.println(result);
     }
