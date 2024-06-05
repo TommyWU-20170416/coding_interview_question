@@ -1,6 +1,8 @@
 package slidewindow;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 3.https://leetcode.com/problems/longest-substring-without-repeating-characters/
@@ -31,14 +33,14 @@ import java.util.HashMap;
  * Input: s = ""
  * Output: 0
  */
-public class Longest_Substring_Without_Repeating_Characters {
-    private static String s = "abca";
+public class Longest_Substring_Without_Repeating_Characters_3 {
+    private static String s = "abcabcbb";
 //	private static String s = "bbbbb";
-//	private static String s = "pwwpkew";
+//    private static String s = "pwwpkea";
 
     //	private static String s = "";
     public static void main(String[] args) {
-        Longest_Substring_Without_Repeating_Characters test = new Longest_Substring_Without_Repeating_Characters();
+        Longest_Substring_Without_Repeating_Characters_3 test = new Longest_Substring_Without_Repeating_Characters_3();
         int result = test.lengthOfLongestSubstring(s);
         System.out.println("result:" + result);
     }
@@ -54,19 +56,19 @@ public class Longest_Substring_Without_Repeating_Characters {
         /**
          * https://leetcode.com/problems/longest-substring-without-repeating-characters/solutions/4043492/best-and-understandable-code-in-java/
          */
-        HashMap<Character, Integer> map = new HashMap<>();
-        int max = 0;
-        int low = 0;
-        for (int i = 0; i < s.length(); i++) {
-            char curr = s.charAt(i);
-            if (map.containsKey(curr)) {
-                // 當有重複，跳到重覆後面的位置當作不重複的起始點
-                low = Math.max(low, map.get(curr) + 1);
-            }
-            map.put(curr, i);
-            max = Math.max(max, i - low + 1);
-        }
-        return max;
+//        HashMap<Character, Integer> map = new HashMap<>();
+//        int max = 0;
+//        int low = 0;
+//        for (int i = 0; i < s.length(); i++) {
+//            char curr = s.charAt(i);
+//            if (map.containsKey(curr)) {
+//                // 當有重複，跳到重覆後面的位置當作不重複的起始點
+//                low = Math.max(low, map.get(curr) + 1);
+//            }
+//            map.put(curr, i);
+//            max = Math.max(max, i - low + 1);
+//        }
+//        return max;
 
         //        Set set = new HashSet();
 //        int windowStart = 0, windowEnd = 0, maxLength = 0;
@@ -100,5 +102,23 @@ public class Longest_Substring_Without_Repeating_Characters {
 //		}
 //
 //		return maxLength;
+        if (s.isEmpty())
+            return 0;
+
+        int[] charIndex = new int[128]; // 僅限定
+
+        int maxLength = 0;
+        int start = 0;
+
+        for (int end = 0; end < s.length(); end++) {
+            char c = s.charAt(end);
+            if (charIndex[c] > start) {
+                start = charIndex[c];
+            }
+            charIndex[c] = end + 1;
+            maxLength = Math.max(maxLength, end - start + 1);
+        }
+
+        return maxLength;
     }
 }

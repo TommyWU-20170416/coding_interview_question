@@ -18,7 +18,7 @@ import java.util.Map;
  * <p>
  * Input: "eceba"
  * Output: 3
- * Explanation: tis "ece" which its length is 3.
+ * Explanation: this "ece" which its length is 3.
  * content:
  * ec
  * ece
@@ -29,7 +29,7 @@ import java.util.Map;
  * <p>
  * Input: "ccaabbb"
  * Output: 5
- * Explanation: tis "aabbb" which its length is 5.
+ * Explanation: this "aabbb" which its length is 5.
  * content:
  * <p>
  * cc
@@ -39,14 +39,14 @@ import java.util.Map;
  * aabb
  * aabbb
  */
-public class Longest_Substring_with_At_Most_Two_Distinct_Characters {
+public class Longest_Substring_with_At_Most_Two_Distinct_Characters_159 {
 
     //    private static String s1 = "eceba";
 //    private static String s1 = "ccaabbb";
     private static String s1 = "ecebeeeeeeeea";
 
     public static void main(String[] args) {
-        Longest_Substring_with_At_Most_Two_Distinct_Characters test = new Longest_Substring_with_At_Most_Two_Distinct_Characters();
+        Longest_Substring_with_At_Most_Two_Distinct_Characters_159 test = new Longest_Substring_with_At_Most_Two_Distinct_Characters_159();
         int result = test.lengthOfLongestSubstringTwoDistinct(s1);
         System.out.println("result:" + result);
     }
