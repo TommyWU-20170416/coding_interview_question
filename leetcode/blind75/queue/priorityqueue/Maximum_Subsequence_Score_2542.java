@@ -11,14 +11,30 @@ import java.util.PriorityQueue;
  * @author AaronWU
  * @created 創建時間：2024/06/19 15:35:04
  * @since JDK8.0
+ * <p>
+ * 2024/06/20
+ * 這題目的解答 感覺有問題
+ * 因為 queue 是先加上 在 poll，這樣不就有可能把自己給 poll 掉
+ * 如果把自己 poll 掉，這樣乘上 nums2 最小值就不準
+ * 可以把 k = 1 去看看
+ * <p>
+ * 看其他人的說法是這樣 https://leetcode.com/problems/maximum-subsequence-score/solutions/3082106/java-c-python-priority-queue/?envType=study-plan-v2&envId=leetcode-75
+ * nums1 = [5,4,3,2,1]
+ * nums2 = [5,4,3,2,1]
+ * k = 3
+ * During the 4th iteration, the possible sum values are 5,4,3,2 and the multiplication value is 2.
+ * If we pop the value 2, the sum values are 5,4,3 which is accounted for in the previous iteration
+ * where the multiplication value is 3 which would always be a greater answer.
+ * Thus the calculated res from the 4th iteration would never be the final answer.
+ * 大概意思就是即便移除了不正確的數值，可是總體相加也不會是最大的答案
  */
 public class Maximum_Subsequence_Score_2542 {
 
     public static void main(String[] args) {
         Maximum_Subsequence_Score_2542 s = new Maximum_Subsequence_Score_2542();
         Maximum_Subsequence_Score_2542.Solution solution = s.new Solution();
-        int[] nums1 = {1, 3, 3, 2}, nums2 = {2, 1, 3, 4};
-        int k = 3;
+        int[] nums1 = {5, 3, 3, 2}, nums2 = {2, 1, 3, 4};
+        int k = 1;
 
         /**
          * 找出 nums1 & nums2 在相同的 index 中找最大值

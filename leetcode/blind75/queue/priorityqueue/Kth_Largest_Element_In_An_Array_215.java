@@ -16,7 +16,7 @@ public class Kth_Largest_Element_In_An_Array_215 {
         Kth_Largest_Element_In_An_Array_215.Solution solution = s.new Solution();
 //        int[] nums = {3, 2, 1, 5, 6, 4};
         int[] nums = {3, 2, 3, 1, 2, 4, 5, 5, 6};
-        int k = 4;
+        int k = 2;
         int result = solution.findKthLargest(nums, k);
         System.out.println(result);
     }

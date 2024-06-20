@@ -18,9 +18,13 @@ public class Total_Cost_To_Hire_K_Workers_2462 {
         Total_Cost_To_Hire_K_Workers_2462 s = new Total_Cost_To_Hire_K_Workers_2462();
         Total_Cost_To_Hire_K_Workers_2462.Solution solution = s.new Solution();
 
-//        int[] costs = {17, 12, 10, 2, 7, 2, 11, 20, 8};
-        int[] costs = {31, 25, 72, 79, 74, 65, 84, 91, 18, 59, 27, 9, 81, 33, 17, 58};
-        int k = 11, candidates = 2;
+        // practice the empty
+//        int[] costs = {1, 2, 4, 1};
+//        int k = 3, candidates = 3;
+        int[] costs = {17, 12, 10, 2, 7, 2, 11, 20, 8};
+        int k = 3, candidates = 4;
+//        int[] costs = {31, 25, 72, 79, 74, 65, 84, 91, 18, 59, 27, 9, 81, 33, 17, 58};
+//        int k = 11, candidates = 2;
         long reuslt = solution.totalCost(costs, k, candidates);
         System.out.println("result:" + reuslt);
 
