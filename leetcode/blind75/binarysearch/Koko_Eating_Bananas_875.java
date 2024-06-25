@@ -1,4 +1,4 @@
-package tree;
+package binarysearch;
 
 /**
  * 875.https://leetcode.com/problems/koko-eating-bananas/description/
@@ -20,6 +20,17 @@ public class Koko_Eating_Bananas_875 {
     }
 
     class Solution {
+        /**
+         * test1
+         * 解法:
+         * 使用 binary search
+         * 猴子吃香蕉，最高可以吃 max 根，也就是 piles 的最大，最少就是 1 根
+         * 根據這個範圍去計算吃完全部要多少時間 h
+         * 如果 h < H 代表吃太快、如果 h > H 代表吃太慢
+         * 最後要找 h <= H
+         *
+         * 這題跟其他的 binary search 最不一樣的是 使用 recursive 去找，之前都是 while
+         */
         public int minEatingSpeed(int[] piles, int h) {
             if (piles == null || piles.length == 0) return 0;
             int max_banana_number = getMax(piles);
