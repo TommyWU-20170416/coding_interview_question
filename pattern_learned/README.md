@@ -1,17 +1,17 @@
 # 這邊專門收集應用的 pattern，包含基礎以及進階題目說明
 
-### [Fast And Slow](src/fastandslowpointer)
+## [Fast And Slow](src/fastandslowpointer)
 
-### [Next Greater Element](src/nextgreaterelement)
+## [Next Greater Element](src/nextgreaterelement)
 
-### [Prefix Sum](src/prefixsum)
+## [Prefix Sum](src/prefixsum)
 
 - 從左往右加總
 - 從右往左加總
 
-### [Sliding Window](src/slidewindow)
+## [Sliding Window](src/slidewindow)
 
-### [Two Pointer](src/twopointer)
+## [Two Pointer](src/twopointer)
 
 ## [Dynamic Programming](src/dynamicprogramming)
 
@@ -114,3 +114,25 @@
 - 輸出：
     - 最大利潤。
 - 練習
+
+## Bit Manipulation
+
+> 對位元的運算進行練習，優化算法
+
+### 第一章: 基本概念
+
+### 第二章: 基本操作
+
+1. 奇數偶數判斷
+   > 如果都是奇數，再跟 0001 去做 & 的時候，因為奇數尾數一定有1 所以 & 後 == 1 表示奇數
+    - 練習 [判斷奇數偶數 FindOddOrEven.java](src/bitmanipulation/FindOddOrEven.java)
+
+2. 尋找數字內涵蓋的 1 的數量(AND 右移)
+    - 練習 [CountBits.java](src/bitmanipulation/CountBits.java)
+
+3. 在一個陣列中，數字會出現至多兩次，找出僅出現一次的數字。(XOR)
+   > 相同的值在經過 XOR 會變成 0
+    - 練習 [Single_Number_136.java](../leetcode/blind75/bitmanipulation/Single_Number_136.java)
+
+4. 檢查 a 的第 i 位是否為 1 的方法
+    - 練習 [test2 寫法內 - Minimum_Flips_To_Make_A_OR_B_Equal_To_C_1318.java](../leetcode/blind75/bitmanipulation/Minimum_Flips_To_Make_A_OR_B_Equal_To_C_1318.java)
