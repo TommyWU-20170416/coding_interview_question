@@ -1,7 +1,5 @@
 # 這邊專門收集應用的 pattern，包含基礎以及進階題目說明
 
-## pattern
-
 ### [Fast And Slow](src/fastandslowpointer)
 
 ### [Next Greater Element](src/nextgreaterelement)
@@ -14,3 +12,105 @@
 ### [Sliding Window](src/slidewindow)
 
 ### [Two Pointer](src/twopointer)
+
+## [Dynamic Programming](src/dynamicprogramming)
+
+### 第二章. 動態規劃的基本實現([例子 - Fibonacci.java](src/dynamicprogramming/onedim/Fibonacci.java))
+
+    1. ###### 備忘錄（Memoization）- function: fib_memo(int n)
+
+> 動態規劃問題通常可以使用遞歸來解決，但遞歸容易產生重複計算，遞歸與備忘錄示例：斐波那契數列
+
+   ```java
+   /**
+ * 每一個 f(n) = f(n-1) + f(n-2)，若要計算 f(4) 就會重複計算 f(2)兩次，當然算越高的就會重複越多次
+ * f(0) = 0
+ * f(1) = 1
+ * f(2) = f(1) + f(0) = 1
+ * f(3) = f(2) + f(1) = 2
+ * f(4) = f(3)        + f(2) = 3
+ * ____ = f(2) + f(1) + f(2) = 3
+ */
+   ```
+
+    - 備忘錄是一種技術，用來儲存已經計算過的結果，避免重複計算，從而提高效率。
+    - 使用備忘錄後可以把每一次的子問題記錄下來，提供日後查詢，就以計算 fib(10)，使用 memo 前為 177次呼叫fib(), 使用 memo 後僅為 19次
+
+    2. ###### 自底向上（Bottom-Up）方法 - function: fib_memo(int n)
+
+> 就是把最小的子問題依序向上解開來，並且使用 for 或 while 取代 遞迴的呼叫，效率會更好，時間複雜度和空間複雜度都是 O(n)。
+
+#### 練習題
+
+1. 斐波那契數列 LeetCode 509 - Fibonacci Number
+    1. 使用遞歸、備忘錄和自底向上方法來實現。
+2. 爬樓梯 LeetCode 70 - Climbing Stairs
+    1. 每次你可以爬1階或2階，問有多少種不同的方法爬到樓頂。
+3. 令牌求和 LeetCode 198 - House Robber
+    1. 你不能偷連續的房子，問在一定的排列中可以偷到的最大金額。
+4. 最大子序和 LeetCode 53 - Maximum Subarray
+    1. 找出具有最大和的連續子數組（至少包含一個數字）。
+
+- 建議的練習順序
+    - LeetCode 509 - Fibonacci Number
+    - LeetCode 70 - Climbing Stairs
+    - LeetCode 198 - House Robber
+    - LeetCode 53 - Maximum Subarray
+
+### 第三章. 經典問題解析
+
+#### 3.1 背包問題（0/1 Knapsack Problem）
+
+> 問題描述：給定一組物品，每個物品都有重量和價值，還有一個最大承重的背包，問如何選擇物品使得裝入背包中的總價值最大。
+
+- 輸入：
+    - weights：物品的重量列表。
+    - values：物品的價值列表。
+    - W：背包的最大承重。
+- 輸出：
+    - 能夠裝入背包的最大價值。
+- 練習 [Knapsack.java](src/dynamicprogramming/twodim/Knapsack.java)
+
+#### 3.2 最長公共子序列（Longest Common Subsequence, LCS）
+
+> 問題描述：給定兩個字符串，找出它們的最長公共子序列的長度。
+
+- 輸入：
+    - text1：第一個字符串。
+    - text2：第二個字符串。
+- 輸出：
+    - 最長公共子序列的長度。
+- 練習 [Longest_Common_Subsequence_1143.java](../leetcode/blind75/dp/multidim/Longest_Common_Subsequence_1143.java)
+
+#### 3.3 編輯距離（Edit Distance）
+
+> 問題描述：給定兩個字符串，計算將一個字符串轉換為另一個字符串所需的最少編輯操作次數，操作包括插入、刪除和替換字符。
+
+- 輸入：
+    - word1：第一個字符串。
+    - word2：第二個字符串。
+- 輸出：
+    - 最少編輯操作次數，即將 `word1` 轉換為 `word2` 的最短編輯距離。
+- 練習 [EditDistance_72.java](../leetcode/blind75/dp/multidim/EditDistance_72.java)
+
+#### 3.4 不同路徑（Unique Paths）
+
+> 問題描述：一個機器人位於 m * n 網格左上角(0, 0)，每次只能動一步，向下或向右，最終要達到終點(m - 1, n - 1)也就是右下角的位置，問總共有多少條不同路徑
+
+- 輸入：
+    - m:row 數量。
+    - n:col 數量。
+- 輸出：
+    - 不同路徑的總數
+- 練習 [Unique_Paths_62.java](../leetcode/blind75/dp/multidim/Unique_Paths_62.java)
+
+#### 3.5 帶手續費的股票交易最佳時機（Best Time to Buy and Sell Stock with Transaction Fee）
+
+> 問題描述：給定一個數組 prices，它的第 i 個元素表示一支給定股票第 i 天的價格。 一個整型 fee 代表了交易中的手續費。在每一天，你可以進行以下三種操作之一：買入股票、賣出股票或休息。你可以在買入股票之前賣出股票，但你必須支付每筆交易的手續費。求你能獲得的最大利潤。
+
+- 輸入：
+    - prices：股票價格數組。
+    - fee：交易手續費。
+- 輸出：
+    - 最大利潤。
+- 練習
