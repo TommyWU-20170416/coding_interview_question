@@ -1,6 +1,6 @@
-package bitmanipulation;
+package bitmanipulation.checkbit;
 
-public class CountBits {
+public class HammingWeight {
     public static int findOneInNum(int n) {
         int count = 0;
         while (n > 0) {

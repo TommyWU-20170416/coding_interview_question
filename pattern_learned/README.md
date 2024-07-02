@@ -121,18 +121,59 @@
 
 ### 第一章: 基本概念
 
-### 第二章: 基本操作
+#### 1. 二進制表示
 
-1. 奇數偶數判斷
-   > 如果都是奇數，再跟 0001 去做 & 的時候，因為奇數尾數一定有1 所以 & 後 == 1 表示奇數
-    - 練習 [判斷奇數偶數 FindOddOrEven.java](src/bitmanipulation/FindOddOrEven.java)
+##### (1) 二進制數的表示方法
 
-2. 尋找數字內涵蓋的 1 的數量(AND 右移)
-    - 練習 [CountBits.java](src/bitmanipulation/CountBits.java)
+##### (2) 負數的二進制表示（補碼）
 
-3. 在一個陣列中，數字會出現至多兩次，找出僅出現一次的數字。(XOR)
-   > 相同的值在經過 XOR 會變成 0
-    - 練習 [Single_Number_136.java](../leetcode/blind75/bitmanipulation/Single_Number_136.java)
+#### 2. 基本操作
 
-4. 檢查 a 的第 i 位是否為 1 的方法
-    - 練習 [test2 寫法內 - Minimum_Flips_To_Make_A_OR_B_Equal_To_C_1318.java](../leetcode/blind75/bitmanipulation/Minimum_Flips_To_Make_A_OR_B_Equal_To_C_1318.java)
+- AND (&)
+- OR (|)
+- XOR (^)
+- NOT (~)
+- 左移 (<<)
+- 右移 (>>, >>>)
+
+(1) 奇數偶數判斷
+> 如果都是奇數，再跟 0001 去做 & 的時候，因為奇數尾數一定有1 所以 & 後 == 1 表示奇數
+
+- 練習 [判斷奇數偶數 FindOddOrEven.java](src/bitmanipulation/FindOddOrEven.java)
+
+(2) 尋找數字內涵蓋的 1 的數量(AND 右移)
+
+- 練習 [CountBits.java](src/bitmanipulation/CountBits.java)
+
+(3) 在一個陣列中，數字會出現至多兩次，找出僅出現一次的數字。(XOR)
+> 相同的值在經過 XOR 會變成 0
+
+- 練習 [Single_Number_136.java](../leetcode/blind75/bitmanipulation/Single_Number_136.java)
+
+(4) 檢查 a 的第 i 位是否為 1 的方法
+
+- 練習 [test2 寫法內 - Minimum_Flips_To_Make_A_OR_B_Equal_To_C_1318.java](../leetcode/blind75/bitmanipulation/Minimum_Flips_To_Make_A_OR_B_Equal_To_C_1318.java)
+
+### 第二章: 進階操作
+
+#### 1. 設置位元
+
+- 設置第 k 位為 1 - [SetKthBit.java](src/bitmanipulation/setbit/SetKthBit.java)
+- 清除第 k 位（設置為 0）- [ClearKthBit.java](src/bitmanipulation/setbit/ClearKthBit.java)
+- 切換第 k 位（0 變 1，1 變 0 - [ToggleKthBit.java](src/bitmanipulation/setbit/ToggleKthBit.java)
+
+#### 2. 檢查位元
+
+- 檢查第 k 位是否為 1 - [CheckKthBit.java](src/bitmanipulation/checkbit/CheckKthBit.java)
+- 計算 1 的數量（Hamming Weight） - [HammingWeight.java](src/bitmanipulation/checkbit/HammingWeight.java)
+
+#### 3. 移位操作
+
+- 將所有位元左移或右移 n 位。使用 >> 或 << 就可以達到故先不用練習
+- 循環移位 - [LeftRotate.java](src/bitmanipulation/rotatebit/LeftRotate.java)
+
+#### 4. 掩碼操作
+
+> 掩碼: 用於選擇或修改某些特定位元的工具
+
+- 創建並應用掩碼 - [ApplyMask.java](src/bitmanipulation/ApplyMask.java)
