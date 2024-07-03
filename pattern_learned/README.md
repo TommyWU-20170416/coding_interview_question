@@ -177,3 +177,57 @@
 > 掩碼: 用於選擇或修改某些特定位元的工具
 
 - 創建並應用掩碼 - [ApplyMask.java](src/bitmanipulation/ApplyMask.java)
+
+## Trie
+
+### 第一章: Trie 基礎
+
+#### 1. 概念介紹
+
+- Trie 是什麼？
+- 使用情景
+- 優勢與劣勢
+
+#### 2. 基礎操作
+
+- 插入 (Insert)
+- 搜尋 (Search)
+- 刪除 (Delete)
+
+### 第二章: Java 中的 Trie 實作
+
+#### 1. 節點 (Node) 結構
+
+- 定義 TrieNode 類別
+
+#### 2. Trie 結構
+
+- 定義 Trie 類別 - [Trie.java](src/trie/Trie.java)
+    - 實作插入操作
+    - 實作搜尋操作
+    - 實作刪除操作
+
+### 第三章: LeetCode 問題實作
+
+#### 1. 基礎問題
+
+- LeetCode 208: [Implement_Trie_208.java](../leetcode/src/trie/Implement_Trie_208.java)
+- LeetCode 211: [Design_Add_And_Search_Words_Data_Structure_211.java](../leetcode/src/trie/Design_Add_And_Search_Words_Data_Structure_211.java)
+
+#### 2. 進階問題
+
+- LeetCode 212: Word Search II
+- LeetCode 648: Replace Words
+- LeetCode 676: Implement Magic Dictionary
+- LeetCode 677: Map Sum Pairs
+- LeetCode 1268: [Search_Suggestions_System_1268.java](../leetcode/blind75/trie/Search_Suggestions_System_1268.java)
+
+### 第四章: Trie 的進階應用
+
+#### 1. 自動補全系統
+
+- 實作一個簡單的自動補全系統
+
+#### 2. 頻率統計
+
+- 在 Trie 中儲存詞頻
