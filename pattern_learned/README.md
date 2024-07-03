@@ -231,3 +231,48 @@
 #### 2. 頻率統計
 
 - 在 Trie 中儲存詞頻
+
+## Intervals
+
+### 第一章: 課前準備
+
+Java 語言基礎：熟悉 Java 語言的基本語法和數據結構，如數組、列表和映射。
+基礎演算法知識：了解基本排序演算法（如快速排序、合併排序）。
+
+### 第二章: 課程內容
+
+#### (1) 基礎概念
+
+> 間隔（Intervals）的定義：理解什麼是間隔以及如何在 Java 中表示間隔（例如，使用 int[] 或 List<int[]>）。常見操作：學習如何對間隔進行基本操作，如合併、插入和交集。
+
+```java
+  // int[] interval = {start, end};
+```
+
+#### (2) 常見問題類型
+
+- 合併間隔
+    - LeetCode 56. [Merge_Intervals_56.java](src/intervals/Merge_Intervals_56.java)：給定一組間隔，合併所有重疊的間隔。
+    - LeetCode 986. Interval List Intersections：找到兩個間隔列表的交集。
+
+- 插入間隔
+    - LeetCode 57. [Insert_Interval_57.java](src/intervals/Insert_Interval_57.java)：在不重疊的間隔列表中插入一個新的間隔，並合併所有可能的重疊間隔。
+      覆蓋間隔
+    - LeetCode 1288. Remove Covered Intervals：移除覆蓋其他間隔的間隔。
+      無重疊間隔
+    - LeetCode 435. [Non_overlapping_Intervals_435.java](../leetcode/blind75/intervals/Non_overlapping_Intervals_435.java)：找到使得間隔之間無重疊的最小移除數量。
+
+- 會議室問題
+    - LeetCode 252. Meeting Rooms：判斷一個人是否能參加所有會議。
+    - LeetCode 253. Meeting Rooms II：計算需要多少個會議室來安排所有會議。
+
+- 區間覆蓋問題
+    - LeetCode 1288. Remove Covered Intervals：找到最少的區間以覆蓋區間。
+
+#### (3) 進階問題
+
+- 間隔叢集
+    - LeetCode 715. Range Module：設計一個數據結構來高效地處理多個區間操作，如添加區間和查詢區間。
+- 最大區間
+    - LeetCode 352. Data Stream as Disjoint Intervals：給定一個數據流，動態地保持不重疊的區間列表。
+
