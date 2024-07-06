@@ -276,3 +276,43 @@ Java 語言基礎：熟悉 Java 語言的基本語法和數據結構，如數組
 - 最大區間
     - LeetCode 352. Data Stream as Disjoint Intervals：給定一個數據流，動態地保持不重疊的區間列表。
 
+## Monotonic Stack
+
+### 第一章: 基礎介紹與概念
+
+#### 1. Monotonic Stack 基本概念
+
+- 什麼是 Monotonic Stack
+
+> 定義：Monotonic Stack 是一種特殊的棧，其特性是棧內元素保持單調遞增或單調遞減順序。
+
+> 優勢：它在許多問題中能夠幫助我們在常數時間內獲取某些特定的信息，例如下一个更大的元素、下一個更小的元素等。
+
+> 應用場景：處理滑動窗口、區間最大值/最小值問題、雨水收集問題等。
+
+- 為什麼要使用 Monotonic Stack
+- 單調遞增棧與單調遞減棧的區別與應用
+- 基本操作與實現 - [MonotonicStack.java](src%2Fmonotonicstack%2FMonotonicStack.java)
+
+#### 2. Monotonic Stack 的基本操作（push, pop, peek）
+
+- 使用 Java 實現基本的 Monotonic Stack
+- 基礎問題練習
+- 練習題
+    - LeetCode 496: Next Greater Element I
+    - LeetCode 739: Daily Temperatures
+    - LeetCode 901: Online Stock Span
+
+### 第二章: 進階應用與實現
+
+#### 1. 進階問題解析
+
+- 深入解析單調棧在處理區間最大值/最小值問題中的應用
+- 使用單調棧進行滑動窗口問題的解決
+- 進階問題練習
+    - LeetCode 84: Largest Rectangle in Histogram
+    - LeetCode 85: Maximal Rectangle
+    - LeetCode 42: Trapping Rain Water
+- 綜合應用。解析和實現一些綜合性更高的問題
+    - LeetCode 907: Sum of Subarray Minimums
+    - LeetCode 239: Sliding Window Maximum
