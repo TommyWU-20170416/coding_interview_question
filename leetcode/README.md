@@ -62,3 +62,14 @@ method: For                  operation took   739607 nanoseconds on average.
 
 
 ## 字串 > char[] > byte[]
+
+## 陣列排序方式
+[Merge_Intervals_56.java](..%2Fpattern_learned%2Fsrc%2Fintervals%2FMerge_Intervals_56.java)
+Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // 同等下面的意思
+Arrays.sort(intervals, Comparator.comparingInt((int[] a) -> a[0]).reversed()); // 這是由小大到排序後，再進行翻轉，就可以獲得由大到小
+Arrays.sort(intervals, (a, b) -> a[0] - b[0]); // 測試下來 比較快
+
+## 陣列轉成 List
+List<int[]> result = new ArrayList<>();
+result.toArray(new int[result.size()][]);

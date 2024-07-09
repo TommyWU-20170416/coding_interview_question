@@ -32,35 +32,55 @@ public class Merge_Intervals_56 {
 
 
     class Solution {
+        //        public int[][] merge(int[][] intervals) {
+//            if (intervals.length <= 1) {
+//                return intervals;
+//            }
+//
+//            // 按照區間的起點進行排序
+//            // Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // 同等下面的意思
+//            // Arrays.sort(intervals, Comparator.comparingInt((int[] a) -> a[0]).reversed()); // 這是由小大到排序後，再進行翻轉，就可以獲得由大到小
+//            Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+//
+//            List<int[]> result = new ArrayList<>(); // 因為不知道 merge 後的大小，所以先用 list 做使用
+//            int[] currentInterval = intervals[0];
+//            result.add(currentInterval);
+//
+//            for (int[] interval : intervals) {
+//                int currentEnd = currentInterval[1];
+//                int nextStart = interval[0];
+//                int nextEnd = interval[1];
+//
+//                if (currentEnd >= nextStart) {
+//                    // 重疊的區間，合併它們
+//                    currentInterval[1] = Math.max(currentEnd, nextEnd);
+//                } else {
+//                    // 不重疊的區間，將新的區間加入結果中
+//                    currentInterval = interval;
+//                    result.add(currentInterval);
+//                }
+//            }
+//
+//            return result.toArray(new int[result.size()][]);
+//        }
+
+        /**
+         * 把 sort 改成 如下
+         * Runtime: 8ms, Beats 84.36%
+         */
         public int[][] merge(int[][] intervals) {
-            if (intervals.length <= 1) {
-                return intervals;
-            }
-
-            // 按照區間的起點進行排序
-            // Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // 同等下面的意思
-            // Arrays.sort(intervals, Comparator.comparingInt((int[] a) -> a[0]).reversed()); // 這是由小大到排序後，再進行翻轉，就可以獲得由大到小
-            Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
-
-            List<int[]> result = new ArrayList<>(); // 因為不知道 merge 後的大小，所以先用 list 做使用
-            int[] currentInterval = intervals[0];
-            result.add(currentInterval);
+            Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+            List<int[]> result = new ArrayList<>();
+            int[] lastInterval = intervals[0];
 
             for (int[] interval : intervals) {
-                int currentEnd = currentInterval[1];
-                int nextStart = interval[0];
-                int nextEnd = interval[1];
-
-                if (currentEnd >= nextStart) {
-                    // 重疊的區間，合併它們
-                    currentInterval[1] = Math.max(currentEnd, nextEnd);
+                if (interval[0] <= lastInterval[1]) {
+                    lastInterval[1] = Math.max(interval[1], lastInterval[1]);
                 } else {
-                    // 不重疊的區間，將新的區間加入結果中
-                    currentInterval = interval;
-                    result.add(currentInterval);
+                    result.add(interval);
+                    lastInterval = interval;
                 }
             }
-
             return result.toArray(new int[result.size()][]);
         }
     }

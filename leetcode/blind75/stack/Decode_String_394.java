@@ -22,6 +22,15 @@ public class Decode_String_394 {
     }
 
     class Solution {
+        /**
+         * test1
+         * 解法
+         * 1. 遇到數字，記錄數字
+         * 2. 遇到"["，記錄前面遇到的數字以及英文字，紀錄後要初始化
+         * 3. 遇到"]"，紀錄先前記憶的 sb + stack.pop 出來的
+         * EX: 做到 bc 後的 ']' 時，sb = "bc"，然後 stack_string 的 aaa + bc
+         * 4. 遇到字母，紀錄字母
+         */
         public String decodeString(String s) {
             Stack<Integer> stack_integer = new Stack<>();
             Stack<StringBuilder> stack_string = new Stack<>();

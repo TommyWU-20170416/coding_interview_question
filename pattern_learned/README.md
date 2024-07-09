@@ -178,6 +178,9 @@
 
 - 創建並應用掩碼 - [ApplyMask.java](src/bitmanipulation/ApplyMask.java)
 
+#### 5. 壓縮與排序
+ - 將左區間(int)與右區間(int)壓縮到long的後32位元與前32位元，並進行排序。[Minimum_Number_Of_Arrows_To_Burst_Balloons_452.java](../leetcode/blind75/intervals/Minimum_Number_Of_Arrows_To_Burst_Balloons_452.java)
+
 ## Trie
 
 ### 第一章: Trie 基礎
@@ -210,8 +213,7 @@
 ### 第三章: LeetCode 問題實作
 
 #### 1. 基礎問題
-
-- LeetCode 208: [Implement_Trie_208.java](../leetcode/src/trie/Implement_Trie_208.java)
+- LeetCode 208: [Implement_Trie_208.java](../leetcode/blind75/src/trie/Implement_Trie_208.java)
 - LeetCode 211: [Design_Add_And_Search_Words_Data_Structure_211.java](../leetcode/src/trie/Design_Add_And_Search_Words_Data_Structure_211.java)
 
 #### 2. 進階問題
@@ -243,10 +245,16 @@ Java 語言基礎：熟悉 Java 語言的基本語法和數據結構，如數組
 
 #### (1) 基礎概念
 
-> 間隔（Intervals）的定義：理解什麼是間隔以及如何在 Java 中表示間隔（例如，使用 int[] 或 List<int[]>）。常見操作：學習如何對間隔進行基本操作，如合併、插入和交集。
+> 在許多問題中，我們需要處理一組區間。每個區間可以表示為一對有序的數 (start, end)，其中 start 是區間的起點，end 是區間的終點。這些區間可以表示一段連續的數字範圍。
 
 ```java
-  // int[] interval = {start, end};
+// 在 Java 中，我們可以使用 int[] 來表示一個區間：
+int[] interval = {start, end};
+
+// 或者使用一個列表來表示多個區間：
+List<int[]> intervals = new ArrayList<>();
+intervals.add(new int[]{start1, end1});
+intervals.add(new int[]{start2, end2});
 ```
 
 #### (2) 常見問題類型
@@ -292,7 +300,7 @@ Java 語言基礎：熟悉 Java 語言的基本語法和數據結構，如數組
 
 - 為什麼要使用 Monotonic Stack
 - 單調遞增棧與單調遞減棧的區別與應用
-- 基本操作與實現 - [MonotonicStack.java](src%2Fmonotonicstack%2FMonotonicStack.java)
+- 基本操作與實現 - [MonotonicStack.java](src/monotonicstack/MonotonicStack.java)
 
 #### 2. Monotonic Stack 的基本操作（push, pop, peek）
 
