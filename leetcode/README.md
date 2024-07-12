@@ -91,3 +91,35 @@ Boyer–Moore majority vote algorithm 多數投票演算法
 [Majority_Element_169.java](grind75/array/Majority_Element_169.java)
 原地演算法（in-place algorithm，也稱就地演算法）
 [Sort_Colors_75.java](grind75/array/Sort_Colors_75.java)
+
+## O(n) 有時候也是會跑輸 O(n^2)
+
+[Contains_Duplicate_217.java](grind75%2Farray%2FContains_Duplicate_217.java)
+
+## 數學
+
+### 最大公因數
+
+[Greatest_Common_Divisor_Of_Strings_1071.java](blind75%2Farray%2FGreatest_Common_Divisor_Of_Strings_1071.java)
+有兩種方式。Ex: gcd(48, 18)表示
+
+1. 第一種使用餘數(推薦，算得比較快)
+    - 48 / 18 = 2 ... 12
+    - 18 / 12 = 1 ... 6
+    - 12 / 6 = 2 ... 0
+
+> 簡化公式:
+> gcd(a, 0) = a <br/>
+> gcd(a, b) = gcd(b, a % b)
+
+2. 第二種使用加減
+    - 48 - 18 = 30
+    - 30 - 18 = 12
+    - 18 - 12 = 6(因為減去後已經比 num2 小，所以換 num2 放前面)
+    - 12 - 6 = 6
+    - 6 = 6
+
+> 簡化公式:
+> gcd(a, a) = a <br/>
+> gcd(a, b) = gcd(a-b, b); a > b <br/>
+> gcd(a, b) = gcd(a, b-a); b > a <br/>

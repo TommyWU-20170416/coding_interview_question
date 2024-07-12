@@ -1,5 +1,8 @@
 package array;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 151.https://leetcode.com/problems/reverse-words-in-a-string/description/
  *
@@ -11,8 +14,8 @@ public class Reverse_Words_In_A_String_151 {
     public static void main(String[] args) {
         Reverse_Words_In_A_String_151 r = new Reverse_Words_In_A_String_151();
         Reverse_Words_In_A_String_151.Solution s = r.new Solution();
-//        String str = "the sky is blue";
-        String str = "  hello  world  ";
+        String str = "the sky is blue";
+//        String str = "  hello  world  ";
 //        String str = "a good   example";
         String result = s.reverseWords(str);
         System.out.println("result: " + result + ";");
@@ -20,6 +23,7 @@ public class Reverse_Words_In_A_String_151 {
 
     class Solution {
         /**
+         * Runtime: 6 ms, Beats 85.41%
          * test1
          * 使用方法:
          * 1. 先把 前後空白都 trim 掉
@@ -41,13 +45,15 @@ public class Reverse_Words_In_A_String_151 {
 //        }
 
         /**
+         * Runtime: 2 ms, Beats 99.56%
          * test2
          * 使用方法:
          * 1. 從後面往前找第一個單字的尾巴(如果start_index < 0 就是找完了要跳脫)
          * 2. 找到後繼續往下找第一個空白(如果start_index < 0 就是找完了要跳脫)
-         * 3. 空白 +1 ~ 尾巴 = 最後一組單字
+         * 3. 空白 +1 ~ 尾巴 = 一組單字
          * 4. 把單字放到 res
          * 5. 單字新增空格
+         * 6. res 會 + 1 是因為最後會多一個空格，所以return 要砍掉
          */
         public String reverseWords(String s) {
             char[] str = s.toCharArray();

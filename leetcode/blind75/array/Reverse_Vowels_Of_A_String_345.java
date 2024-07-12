@@ -78,6 +78,7 @@ public class Reverse_Vowels_Of_A_String_345 {
 //        }
 
         /**
+         * Runtime: 1 ms, Beats 100.00% O(n)
          * test2
          * 使用方法:
          * 由於 indexOf 找字母是 O(n) 所以改用 boolean[] 去尋找達到 O(1)
@@ -99,26 +100,22 @@ public class Reverse_Vowels_Of_A_String_345 {
             int i_right = s.length() - 1;
 
             while (i_left < i_right) {
-                // left >> util meet the vowel
+                // 如果這邊用 if 替換，每一次近來只做一次，下一次要等到最外層 while 再呼叫近來
+                // 理論上這樣會比較慢，所以使用 while 當下處理完比較快
+                // 只是 leetcode 測出來一樣的 time complexity
                 while (i_left < i_right && !isVowels[word[i_left]]) {
                     i_left++;
                 }
-
-                // right >> util meet the vowel
                 while (i_left < i_right && !isVowels[word[i_right]]) {
                     i_right--;
                 }
 
-                // swap
-//                if (i_left < i_right) { // 在本題若多了 if 判斷會變慢
                 char tmp = word[i_left];
                 word[i_left] = word[i_right];
                 word[i_right] = tmp;
                 i_left++;
                 i_right--;
-//                }
             }
-
             return new String(word);
         }
     }

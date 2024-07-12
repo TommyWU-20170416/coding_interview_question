@@ -24,13 +24,15 @@ public class Kids_With_The_Greatest_Number_Of_Candies_1431 {
 
 class KidsWithTheGreatestNumberOfCandies_1431_Solution {
 
-    // test1
-    // 使用方法: 暴力解 這樣會有兩倍的 n 因為要去尋找最大值，沒看到有更好的解法
+    /**
+     * Runtime: 0 ms, Beats 100.00% O(n)
+     * 使用方法: 暴力解 這樣會有兩倍的 n 因為要去尋找最大值，沒看到有更好的解法
+     */
     public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
         // find the biggest num
         int max = 0;
         for (int i = 0; i < candies.length; i++) {
-            if (max < candies[i]) max = candies[i];
+            if (max < candies[i]) max = candies[i]; // 如果使用 Math.max 會找比較慢，因為還要呼叫函數
         }
 
         List<Boolean> result = new ArrayList<>();

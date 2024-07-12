@@ -17,50 +17,59 @@ package array;
  */
 public class Can_Place_Flowers_605 {
     public static void main(String[] args) {
-        Can_Place_Flowers_605_Solution s = new Can_Place_Flowers_605_Solution();
-        int[] flowerbed = {1, 0, 0, 0, 1};
+        Can_Place_Flowers_605 ss = new Can_Place_Flowers_605();
+        Can_Place_Flowers_605.Solution s = ss.new Solution();
+//        int[] flowerbed = {1, 0, 0, 0, 1};
+        int[] flowerbed = {0, 1, 0, 0, 1};
         int n = 1;
         boolean b = s.canPlaceFlowers(flowerbed, n);
-        System.out.println();
+        System.out.println(b);
     }
-}
 
-// 如果是 flowerbed[i] = 0
+    // 如果是 flowerbed[i] = 0
 // 就進去 看左跟右是否為 0 如果是就把當下的 變為 1
-class Can_Place_Flowers_605_Solution {
-//    public boolean canPlaceFlowers(int[] flowerbed, int n) {
-//        int count = 0;
+    class Solution {
+        /**
+         * Runtime: 1 ms, Beats 97.63% O(n)
+         * 檢查左邊是否為 0，檢查右邊是否為 0
+         * 如果兩邊都是 0 表示可以插花，把 n 扣掉
+         * 如果最多可以插兩朵， n = 1，則 n 最後會等於 -1
+         * 所以 return n <= 0;
+         */
+//        public boolean canPlaceFlowers(int[] flowerbed, int n) {
+//            for (int i = 0; i < flowerbed.length; i++) {
+//                if (flowerbed[i] == 0) {
+//                    boolean isLeftEmpty = (i == 0 || flowerbed[i - 1] == 0);
+//                    boolean isRightEmpty = (i == flowerbed.length - 1 || flowerbed[i + 1] == 0);
 //
-//        for (int i = 0; i < flowerbed.length; i++) {
-//            if (flowerbed[i] == 0) {
-//                boolean isLeftEmpty = (i == 0 || flowerbed[i - 1] == 0);
-//                boolean isRightEmpty = (i == flowerbed.length - 1 || flowerbed[i + 1] == 0);
-//
-//                if (isLeftEmpty && isRightEmpty) {
-//                    flowerbed[i] = 1;
-//                    count++;
+//                    if (isLeftEmpty && isRightEmpty) {
+//                        flowerbed[i] = 1;
+//                        n--;
+//                    }
 //                }
 //            }
+//            return n <= 0;
 //        }
-//        return count >= n;
-//    }
 
-    public boolean canPlaceFlowers(final int[] flowerbed, int n) {
-        if (n == 0) return true;
-        final int length = flowerbed.length;
-        int empty = 1;
-        for (int i = 0; i < length; i++) {
-            final int slot = flowerbed[i];
-            if (slot == 0) {
-                empty++;
-            } else {
-                n -= empty - 1 >>> 1;
-                if (n <= 0) return true;
-                empty = 1;
-                i++;
+        /**
+         * 如果都是 0，下一個插花的距離就是往後 + 2
+         * 一次跳兩格，若到了 0 但不能插花 就多 +1 格
+         * i == len - 1；如果倒數第二個是 0 ，最後一個也就可以插花，倒數第二個是否等於 0 會在上一次的 flowerbed[i] == flowerbed[i + 1] 檢查過
+         * 這個也是確保最後不會溢位
+         * 滿巧妙的思考，一次往後跳兩隔，但同時也檢查下一個是不是 0
+         */
+        public boolean canPlaceFlowers(int[] flowerbed, int n) {
+            int len = flowerbed.length;
+            for (int i = 0; i < len; i = i + 2) {
+                if (flowerbed[i] == 0) {
+                    if (i == len - 1 || flowerbed[i] == flowerbed[i + 1]) {
+                        n--;
+                    } else {
+                        i++;
+                    }
+                }
             }
+            return n <= 0;
         }
-        n -= empty >>> 1;
-        return n <= 0;
     }
 }
