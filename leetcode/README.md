@@ -43,33 +43,51 @@
     - 性能不好
 
 ### 結論
+
 - 高效複製：使用 System.arraycopy 或 Arrays.copyOf。
 - 全部複製：使用 clone。
 - 特殊處理：使用 for。
-- 淺拷貝　：1-4 方法都是指引到原數組
+- 淺拷貝 ：1-4 方法都是指引到原數組
 
 ### 實測: 分成一維以及二維，1000 rounds * 1000 array_length
-method: System.arraycopy     operation took      205 nanoseconds on average.
-method: Arrays.copyOf        operation took     2083 nanoseconds on average.
-method: clone                operation took     2341 nanoseconds on average.
-method: Arrays.copyOfRange   operation took     2198 nanoseconds on average.
-method: For                  operation took     4011 nanoseconds on average.
-method: System.arraycopy     operation took   832404 nanoseconds on average.
-method: Arrays.copyOf        operation took  1057720 nanoseconds on average.
-method: clone                operation took  1076408 nanoseconds on average.
-method: Arrays.copyOfRange   operation took   969507 nanoseconds on average.
-method: For                  operation took   739607 nanoseconds on average.
 
+method: System.arraycopy operation took 205 nanoseconds on average.
+method: Arrays.copyOf operation took 2083 nanoseconds on average.
+method: clone operation took 2341 nanoseconds on average.
+method: Arrays.copyOfRange operation took 2198 nanoseconds on average.
+method: For operation took 4011 nanoseconds on average.
+method: System.arraycopy operation took 832404 nanoseconds on average.
+method: Arrays.copyOf operation took 1057720 nanoseconds on average.
+method: clone operation took 1076408 nanoseconds on average.
+method: Arrays.copyOfRange operation took 969507 nanoseconds on average.
+method: For operation took 739607 nanoseconds on average.
 
 ## 字串 > char[] > byte[]
 
 ## 陣列排序方式
-[Merge_Intervals_56.java](..%2Fpattern_learned%2Fsrc%2Fintervals%2FMerge_Intervals_56.java)
+
+[Merge_Intervals_56.java](../pattern_learned/src/intervals/Merge_Intervals_56.java)
 Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
 Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // 同等下面的意思
 Arrays.sort(intervals, Comparator.comparingInt((int[] a) -> a[0]).reversed()); // 這是由小大到排序後，再進行翻轉，就可以獲得由大到小
 Arrays.sort(intervals, (a, b) -> a[0] - b[0]); // 測試下來 比較快
 
 ## 陣列轉成 List
+
 List<int[]> result = new ArrayList<>();
 result.toArray(new int[result.size()][]);
+
+## 雙 For 優化方式
+
+### 改變 i 跟 j 寫法
+
+[Two_Sum_1.java](grind75/array/Two_Sum_1.java)
+
+### hashmap
+
+## 有名演算法
+
+Boyer–Moore majority vote algorithm 多數投票演算法
+[Majority_Element_169.java](grind75/array/Majority_Element_169.java)
+原地演算法（in-place algorithm，也稱就地演算法）
+[Sort_Colors_75.java](grind75/array/Sort_Colors_75.java)

@@ -15,8 +15,10 @@ public class Search_Suggestions_System_1268 {
     public static void main(String[] args) {
         Search_Suggestions_System_1268 s = new Search_Suggestions_System_1268();
         Search_Suggestions_System_1268.Solution solution = s.new Solution();
-        String[] products = {"mobile", "mouse", "moneypot", "monitor", "mousepad"};
-        String searchWord = "abc";
+//        String[] products = {"mobile", "mouse", "moneypot", "monitor", "mousepad"};
+//        String searchWord = "mao";
+        String[] products = {"havana"};
+        String searchWord = "tatiana";
         List<List<String>> result = solution.suggestedProducts(products, searchWord);
 
         System.out.println(result);
@@ -140,18 +142,37 @@ public class Search_Suggestions_System_1268 {
             List<List<String>> result = new ArrayList<>();
             TrieNode node = root;
 
+            // 如果 第一個 & 第三個字有匹配，但第二個字沒有，則第三個也要回傳[]
             for (int i = 0; i < searchWord.length(); i++) {
                 char c = searchWord.charAt(i);
                 if (node != null) {
-                    node = node.children[c - 'a']; // 遍歷字典樹的子節點
+                    node = node.children[c - 'a'];
                 }
                 if (node == null) {
-                    result.add(new ArrayList<>()); // 如果節點不存在，返回空列表
+                    result.add(new ArrayList<>());
                 } else {
-                    result.add(node.suggestions); // 返回當前節點的建議列表
+                    result.add(node.suggestions);
                 }
             }
-
+            // 等同上面的方法，當發現沒找到下一層，後面的都回空
+//            boolean isNotFound = false;
+//            int index = 0;
+//            for (int i = 0; i < searchWord.length(); i++) {
+//                char c = searchWord.charAt(i);
+//                if (node.children[c - 'a'] != null) {
+//                    node = node.children[c - 'a'];
+//                    result.add(node.suggestions);
+//                } else {
+//                    isNotFound = true;
+//                    index = i;
+//                    break;
+//                }
+//            }
+//            if (isNotFound) {
+//                for (int i = 0; i < searchWord.length() - index; i++) {
+//                    result.add(new ArrayList<>());
+//                }
+//            }
             return result;
         }
 

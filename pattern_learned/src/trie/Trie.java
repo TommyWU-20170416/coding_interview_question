@@ -13,8 +13,8 @@ public class Trie {
         for (char c : word.toCharArray()) {
             if (node.children[c - 'a'] == null) {
                 node.children[c - 'a'] = new TrieNode();
+                node = node.children[c - 'a'];
             }
-            node = node.children[c - 'a'];
         }
         node.isEndOfWord = true;
     }

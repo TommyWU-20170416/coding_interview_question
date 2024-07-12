@@ -8,6 +8,14 @@ package trie;
  * @since JDK8.0
  */
 public class Design_Add_And_Search_Words_Data_Structure_211 {
+    /**
+     * Runtime: 164 ms, Beats 92.49%
+     * 先判斷是 '.' 還是文字
+     * 文字的話就繼續呼叫 dfs，若是文字直接做 for ，如果再遇到一次 '.' 就會有問題
+     * '.' 的話要從 a - z 去看 node.children[i] != null 接著是最重要的，也要判段 dfs return 什麼
+     * <p>
+     * 意思是 如果 下一層不是空 且 繼續往後呼叫也回傳 true，就表示可以到下一層繼續找答案
+     */
     class TrieNode {
         TrieNode[] children;
         boolean isEndOfWord;
@@ -71,7 +79,7 @@ public class Design_Add_And_Search_Words_Data_Structure_211 {
 //        boolean c = d.search(".ad");
 //        boolean e = d.search("b..");
         d.addWord("a");
-        d.addWord("a");
+        d.addWord("ab");
         boolean a = d.search(".");
         boolean aa = d.search("a");
         boolean aaa = d.search("aa");

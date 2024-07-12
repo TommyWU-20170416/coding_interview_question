@@ -1,9 +1,6 @@
 package twopointer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * 15.https://leetcode.com/problems/3sum/
@@ -15,129 +12,105 @@ import java.util.stream.Collectors;
  * Given an integer array nums, return all the triplets [nums[i],
  * nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] +
  * nums[j] + nums[k] == 0.
- * Input : nums = [-1,0,1,2,-1,-4]
- * Output: [[-1,-1,2],[-1,0,1]]
+ * <ul>
+ *     <li>Input : nums = [-1,0,1,2,-1,-4] <br> Output: [[-1,-1,2],[-1,0,1]]</li>
+ *     <li>Input : nums = [-2,0,0,2,2] <br> Output: [[-2,0,2]]</li>
+ *     <li>Input : nums = [-2,0,3,-1,4,0,3,4,1,1,1,-3,-5,4,0] <br> Output: [[-5,1,4],[-3,-1,4],[-3,0,3],[-2,-1,3],[-2,1,1],[-1,0,1],[0,0,0]]</li>
+ * </ul>
  * <p>
- * Input : nums = [-2,0,0,2,2]
- * Output: [[-2,0,2]]
- * <p>
- * Input : nums = [-2,0,3,-1,4,0,3,4,1,1,1,-3,-5,4,0]
- * Output:
- * [[-5,1,4],[-3,-1,4],[-3,0,3],[-2,-1,3],[-2,1,1],[-1,0,1],[0,0,0]]
- * <p>
- * Input : nums = [0,0,0]
- * Output: [[0, 0, 0]]
+ * 這題不能用暴力解，一定會 TLE
  */
 public class Sum3 {
-    private static int[] nums = {-1, 0, 0, 1, 1, 2, -1, -1, -1, -4};
-
     public static void main(String[] args) {
-        Sum3 test = new Sum3();
-        printList(test.newThreeSum(nums));
-
-//        printList(test.threeSum(nums));
-    }
-
-    private List<List<Integer>> newThreeSum(int[] nums) {
-        Arrays.sort(nums);
-        List<List<Integer>> list = new ArrayList<List<Integer>>();
-        for (int i = 0; i < nums.length - 2; i++) {
-            /** -1 跟 -1 會重複*/
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
-            findTwoPointer(nums, -nums[i], i + 1, list);
-        }
-        return list;
+        Sum3 ss = new Sum3();
+        Sum3.Solution solution = ss.new Solution();
+//        int[] nums = {-2, 0, 3, -1, 4, 0, 3, 4, 1, 1, 1, -3, -5, 4, 0};
+//        int[] nums = {0, 1, 1};
+//        int[] nums = {0, 0, 0, 0};
+        int[] nums = {-1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4};
+        List<List<Integer>> result = solution.threeSum(nums);
+        System.out.print(result);
     }
 
     /**
-     * @param nums       要搜尋的 int[]
-     * @param target     要搜尋的 target
-     * @param startIndex 要開始搜尋的 index
+     * Runtime: 440 ms, Beats 25.64%
+     * 排序後跑 for 先找出第一個數，也就是未來 two sum 的 target
+     * 為避免有重複值出現，判斷 nums[i] == nums[i - 1]
+     *
+     * two sum 為避免重複，判斷 mid 是否重複
+     * 使用 two sum 找答案
      */
-    private int[] findTwoPointer(int[] nums, int target, int startIndex, List<List<Integer>> list) {
-        int leftIndex = startIndex, rightIndex = nums.length - 1;
-        while (leftIndex < rightIndex) {
-            int sum = nums[leftIndex] + nums[rightIndex];
-            if (target > sum) leftIndex++;
-            else if (target < sum) rightIndex--;
-            else {
-                int[] s = new int[]{-target, nums[leftIndex], nums[rightIndex]};
-                list.add(Arrays.stream(s).boxed().collect(Collectors.toList()));
-                leftIndex++;
-                rightIndex--;
+//    class Solution {
+//        public List<List<Integer>> threeSum(int[] nums) {
+//            Arrays.sort(nums);
+//            List<List<Integer>> result = new ArrayList<>();
+//            for (int i = 0; i < nums.length; i++) {
+//                if (i > 0 && nums[i] == nums[i - 1]) continue;
+//                twoSum(i + 1, nums, -nums[i], result);
+//            }
+//            return result;
+//        }
+//
+//        private void twoSum(int index, int[] nums, int target, List<List<Integer>> result) {
+//            int mid = Integer.MIN_VALUE;
+//            Map<Integer, Integer> map = new HashMap<>();
+//            for (int i = index; i < nums.length; i++) {
+//                if (map.containsKey(nums[i]) && mid != target - nums[i]) {
+//                    mid = target - nums[i];
+//                    List<Integer> list = new ArrayList<>();
+//                    list.add(-target);
+//                    list.add(target - nums[i]);
+//                    list.add(nums[i]);
+//                    result.add(list);
+//                }
+//                map.put(target - nums[i], nums[i]);
+//            }
+//        }
+//    }
 
-                while (nums[leftIndex - 1] == nums[leftIndex]) leftIndex++;
-                while (nums[rightIndex - 1] == nums[rightIndex]) rightIndex++;
+    /**
+     * Runtime: 22 ms, Beats 99.38%
+     * 因為排序後可以使用 two pointer 去做
+     */
+    class Solution {
+        private int count = 0;
+
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> list = new ArrayList<>();
+            Arrays.sort(nums);
+
+            for (int i = 0; i < nums.length - 2 && nums[i] <= 0; i++) {
+                if (i != 0 && nums[i] == nums[i - 1]) continue;
+                twoSum(-nums[i], nums, i + 1, list);
             }
-
-        }
-        return new int[2];
-    }
-
-    /**
-     * 先把其中一方的x取出來，y+z要等於-x這樣就跟Two Point和 找Target一樣，
-     */
-    public List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> list = new ArrayList<List<Integer>>();
-        if (nums == null || nums.length < 3) {
+            System.out.println("count:" + count);
             return list;
         }
-        Arrays.sort(nums);
 
-        for (int i = 0; i < nums.length - 2; i++) {
-            if (i > 0 && nums[i] == nums[i - 1]) { /* skip same element */
-                continue;
-            }
+        private void twoSum(int target, int[] nums, int startIndex, List<List<Integer>> list) {
+            int left = startIndex;
+            int right = nums.length - 1;
 
-            TwoPoint(nums, i + 1, -nums[i], list);
-        }
-        return list;
-    }
-
-    /**
-     * start會由 i+1 是因為 從 0~i 都是無法配合的或已經找出來的，所以不用再找一次，為避免重複
-     *
-     * @param numbers 原array
-     * @param start   two point要開始計算的地方
-     * @param target  尋找的目標
-     * @param list    返回的list
-     */
-    public static void TwoPoint(int[] numbers, int start, int target, List<List<Integer>> list) {
-
-        int index1 = start, index2 = numbers.length - 1;
-
-        while (index1 < index2) {
-            if (target < numbers[index1] + numbers[index2]) {
-                index2--;
-            } else if (target > numbers[index1] + numbers[index2]) {
-                index1++;
-            } else if (target == numbers[index1] + numbers[index2]) {
-                List<Integer> list1 = new ArrayList<Integer>();
-                list1.add(-target);
-                list1.add(numbers[index1]);
-                list1.add(numbers[index2]);
-                list.add(list1);
-                index1++;/* 當找到target的時候，兩邊都需要向內找到不重複的index */
-                index2--;
-
-                while (index1 < index2 && numbers[index1] == numbers[index1 - 1]) {
-                    index1++;
+            while (left < right) {
+                count++;
+                if (nums[left] + nums[right] < target) left++;
+                else if (nums[left] + nums[right] > target) right--;
+                else {
+                    list.add(Arrays.asList(-target, nums[left], nums[right]));
+                    left++;
+                    right--;
+//                    while (left < right && nums[left] == nums[left - 1]) left++; // 避免重複組合
+//                    while (left < right && nums[right] == nums[right + 1]) right--; // 避免重複組合
                 }
-
-                while (index1 < index2 && numbers[index2] == numbers[index2 + 1]) {
-                    index2--;
-                }
+                // 這樣寫也可避免重複組合，選擇 right 是因為
+                // EX:[-1, -1, 0, 1, 2, 3]
+                // ---[ 0,  1, 2, 3, 4, 5]
+                // 若當前 target = 1 要尋找 mid right 的值
+                // 一進來 left = 1, right = 5
+                // 若此時就判斷 nums[left] == nums[left + 1] 或是判斷 nums[left] == nums[left - 1]
+                // 都會讓答案少一組，因為被跳過了，所以選擇 right 跳過比較適合
+                while (left < right && right < nums.length - 1 && nums[right] == nums[right + 1]) right--;
             }
-        }
-    }
-
-    public static void printList(List<List<Integer>> list) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.print("[");
-            for (int a : list.get(i)) {
-                System.out.print(a + " ");
-            }
-            System.out.println("]");
         }
     }
 }
