@@ -4,9 +4,9 @@ public class Increasing_Triplet_Subsequence_334 {
     public static void main(String[] args) {
         Increasing_Triplet_Subsequence_334 r = new Increasing_Triplet_Subsequence_334();
         Increasing_Triplet_Subsequence_334.Solution s = r.new Solution();
-//        int[] nums = {1, 2, 3, 4, 5}; // true
-        int[] nums = {2, 1, 5, 0, 4, 6}; // true
-//        int[] nums = {20,100,10,12,5,13}; // true
+//        int[] nums = {5,4,3,2,1}; // true
+        int[] nums = {2, 1, 3, 0, 4}; // true
+//        int[] nums = {20,100,10,12,5,13}; // true 不連續也可以
         boolean result = s.increasingTriplet(nums);
         System.out.println("reuslt:" + result);
     }
