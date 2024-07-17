@@ -1,6 +1,8 @@
 package array;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Max_Number_Of_K_Sum_Pairs_1679 {
     public static void main(String[] args) {
@@ -9,16 +11,35 @@ public class Max_Number_Of_K_Sum_Pairs_1679 {
 
 //        int[] nums = {1, 2, 3, 4};
 //        int k = 5;
-//        int[] nums = {5, 5, 1, 3, 1, 3, 2};
-//        int k = 4;
-        int[] nums = {4, 4, 1, 3, 1, 3, 2, 2, 5, 5, 1, 5, 2, 1, 2, 3, 5, 4};
-        int k = 2;
+        int[] nums = {5, 5, 1, 3, 1, 3, 2};
+        int k = 4;
+//        int[] nums = {4, 4, 1, 3, 1, 3, 2, 2, 5, 5, 1, 5, 2, 1, 2, 3, 5, 4};
+//        int k = 2;
         int result = solution.maxOperations(nums, k);
         System.out.println("reuslt:" + result);
     }
 
     class Solution {
         /**
+         * Runtime: 34 ms, Beats 36.98% O(n)
+         */
+//        public int maxOperations(int[] nums, int k) {
+//            Map<Integer, Integer> map = new HashMap<>();
+//            int count = 0;
+//            for (int num : nums) {
+//                if (map.containsKey(k - num)) {
+//                    if(map.get(k - num) == 1) map.remove(k-num);
+//                    else map.put(k - num, map.get(k - num) - 1);
+//                    count++;
+//                } else {
+//                    map.put(num, map.getOrDefault(num, 0) + 1);
+//                }
+//            }
+//            return count;
+//        }
+
+        /**
+         * Runtime: 12 ms, Beats 99.70% O(n log n)
          * test1
          * 解法:
          * 1. 因為 nums[i] >= 1 ，不會有負號，所以先找出 > k 的

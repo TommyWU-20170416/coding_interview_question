@@ -26,6 +26,7 @@ public class Move_Zeroes_283 {
 
     class Solution {
         /**
+         * Runtime: 30 ms, Beats 10.60%。O(n) 雖然是雙層，可是裡面的 while 條件跟外面都是一樣的，所以不會是 O(n * n)
          * test1
          * 解法:
          * 想像上就是兩個 index，左邊找 0 右邊找非0，然後去做交換
@@ -57,6 +58,7 @@ public class Move_Zeroes_283 {
 //        }
 
         /**
+         * Runtime: 1 ms, Beats 100.00%
          * test2
          * 解法:
          * 把非 0 的先更新到前面，後面在依序補 0

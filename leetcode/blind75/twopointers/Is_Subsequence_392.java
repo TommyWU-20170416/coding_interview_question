@@ -21,6 +21,7 @@ public class Is_Subsequence_392 {
 
     class Solution {
         /**
+         * Runtime: 2 ms, Beats 60.94%
          * test1
          * 解法:
          * 使用 index 當左 s 的 index
@@ -39,22 +40,25 @@ public class Is_Subsequence_392 {
 //        }
 
         /**
+         * Runtime: 0 ms, Beats 100.00%
          * test2
          * 優化:
          * 使用 char[] 會比 charAt 還快，雖然 charAt 底層也是去抓 value[index]
-         *
+         * <p>
          * 若要遍歷單一個字就用 charAt
          * 但如果還要對其操作建議用 toCharArray，畢竟 toCharArray 一次就轉好
+         * <p>
+         * 另外把第二個 if 寫在裡面會比單獨寫在外面好，因為有++的時候才要判斷
          */
         public boolean isSubsequence(String s, String t) {
             if (s.length() == 0) return true;
             char[] charS = s.toCharArray();
             char[] charT = t.toCharArray();
             int index = 0;
-            for(char c: charT){
-                if(charS[index] == c){
+            for (char c : charT) {
+                if (charS[index] == c) {
                     index++;
-                    if(index == s.length()) return true;
+                    if (index == s.length()) return true;
                 }
             }
             return false;
