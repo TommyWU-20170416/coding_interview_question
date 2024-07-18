@@ -85,6 +85,11 @@ result.toArray(new int[result.size()][]);
 
 ### hashmap
 
+## Array
+### 陣列可以達到檢查順序不同的字母或數字
+[Find_All_Anagrams_in_a_String_438.java](grind75/string/Find_All_Anagrams_in_a_String_438.java)
+
+
 ## 有名演算法
 
 Boyer–Moore majority vote algorithm 多數投票演算法
@@ -94,13 +99,13 @@ Boyer–Moore majority vote algorithm 多數投票演算法
 
 ## O(n) 有時候也是會跑輸 O(n^2)
 
-[Contains_Duplicate_217.java](grind75%2Farray%2FContains_Duplicate_217.java)
+[Contains_Duplicate_217.java](grind75/array/Contains_Duplicate_217.java)
 
 ## 數學
 
 ### 最大公因數
 
-[Greatest_Common_Divisor_Of_Strings_1071.java](blind75%2Farray%2FGreatest_Common_Divisor_Of_Strings_1071.java)
+[Greatest_Common_Divisor_Of_Strings_1071.java](blind75/array/Greatest_Common_Divisor_Of_Strings_1071.java)
 有兩種方式。Ex: gcd(48, 18)表示
 
 1. 第一種使用餘數(推薦，算得比較快)
