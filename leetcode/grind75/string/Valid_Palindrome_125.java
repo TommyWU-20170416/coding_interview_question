@@ -74,10 +74,8 @@ public class Valid_Palindrome_125 {
         }
 
         private char toLowercase(char c) {
-            if (c >= 'A' && c <= 'Z')
-                return (char) ('a' + (c - 'A'));
-            else
-                return c;
+            if (c >= 'A' && c <= 'Z') return (char) ('a' + (c - 'A'));
+            else return c;
         }
 
         private boolean isValid(char c) {

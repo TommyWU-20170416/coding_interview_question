@@ -21,35 +21,23 @@ public class Reverse_Linked_List_206 {
 
     class Solution {
         /**
+         * Runtime: 0 ms, Beats 100.00%
          * test1
          * 解法:
          * 一個個建立並在放回到起首位置
          */
         public ListNode reverseList(ListNode head) {
-            if(head == null) return null;
-            ListNode tmp = new ListNode(head.val);
-            while (head != null && head.next != null) {
-                ListNode now = new ListNode(head.next.val);
+            if (head == null)
+                return null;
+            ListNode result = new ListNode(head.val);
+            head = head.next;
+            while (head != null) {
+                ListNode tmp = new ListNode(head.val);
+                tmp.next = result;
+                result = tmp;
                 head = head.next;
-                now.next = tmp;
-                tmp = now;
             }
-            return tmp;
+            return result;
         }
-//        public ListNode reverseList(ListNode head) {
-//            if (head == null || head.next == null) return head;
-//
-//            ListNode left = head;
-//            ListNode right = head.next;
-//            left.next = null;
-//
-//            while (right != null) {
-//                ListNode tmp = right.next;
-//                right.next = left;
-//                left = right;
-//                right = tmp;
-//            }
-//            return left;
-//        }
     }
 }

@@ -38,32 +38,24 @@ public class Valid_Anagram_242 {
 //        }
 
         /**
-         * Runtime: 2 ms, Beats 97.17%
+         * Runtime: 1 ms, Beats 99.81%
          * 使用 int[26] 去把第一個 s 出現過的字母加總
          * 再去 跑 t 扣掉出現過的字母
+         * 如果過程中，t -- 之前就是0 代表這是之前沒有看過的字所以 return false
          */
         public boolean isAnagram(String s, String t) {
-            int totalLetters = s.length();
-            int[] charCount = new int[26];
+            if (s.length() != t.length()) return false;
+            int[] sCount = new int[26];
             for (char c : s.toCharArray()) {
-                charCount[c - 'a']++;
+                sCount[c - 'a']++;
             }
+
             for (char c : t.toCharArray()) {
-                if (charCount[c - 'a'] != 0) {
-                    charCount[c - 'a']--;
-                    totalLetters--;
+                if (sCount[c - 'a']-- == 0) {
+                    return false;
                 }
             }
-            // 第二次的 for 用下面的算會 差 1 ms 但看不出來有什麼厲害的
-//            for (char c : t.toCharArray()) {
-//                charCount[c - 'a']--;
-//            }
-//            for (int i : charCount) {
-//                if (i != 0) {
-//                    return false;
-//                }
-//            }
-            return totalLetters == 0;
+            return true;
         }
     }
 }

@@ -41,8 +41,6 @@ public class Search_In_Rotated_Sorted_Array_33 {
                 int mid = start + (end - start) / 2;
 
                 if (nums[mid] == target) return mid;
-
-                // 判斷左邊是否有序
                 if (nums[start] <= nums[mid]) {
                     if (nums[start] <= target && target <= nums[mid]) {
                         end = mid - 1;

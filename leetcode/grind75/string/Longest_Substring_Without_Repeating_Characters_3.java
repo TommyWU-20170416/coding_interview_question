@@ -32,34 +32,34 @@ public class Longest_Substring_Without_Repeating_Characters_3 {
          * 遇到 b 重複的時候，l要走到 c 的位置，並且把 map 內的 a 砍掉
          * 最後的 return 是因為考量到若走到底發現都沒有重複的情境，因此要跟 count 比大小
          */
-        public int lengthOfLongestSubstring(String s) {
-            if (s.length() <= 1) return s.length();
-            int l = 0, maxLen = 0;
-            Map<Character, Integer> map = new HashMap<>();
-            char[] letters = s.toCharArray();
-//            for (int r = 0; r < letters.length; r++) {
-//                if (map.containsKey(letters[r])) {
-//                    count = Math.max(count, r - l);
-//                    int duplicateIndex = map.get(letters[r]);
-//                    while (l <= duplicateIndex) {
-//                        map.remove(letters[l++]);
-//                    }
+//        public int lengthOfLongestSubstring(String s) {
+//            if (s.length() <= 1) return s.length();
+//            int l = 0, maxLen = 0;
+//            Map<Character, Integer> map = new HashMap<>();
+//            char[] letters = s.toCharArray();
+////            for (int r = 0; r < letters.length; r++) {
+////                if (map.containsKey(letters[r])) {
+////                    count = Math.max(count, r - l);
+////                    int duplicateIndex = map.get(letters[r]);
+////                    while (l <= duplicateIndex) {
+////                        map.remove(letters[l++]);
+////                    }
+////                }
+////                map.put(letters[r], r);
+////            }
+////            return Math.max(count, map.size());
+//            // 這邊改變一下寫法，這樣寫比較好懂，就是當重複的時候才更新 left 到重覆的下一個
+//            // 沒有重複就繼續計算 maxLen 跟 放直到 map 內
+//            for (int r = 0; r < s.length(); r++) {
+//                char cur = letters[r];
+//                if (map.containsKey(cur)) {
+//                    l = Math.max(l, map.get(cur) + 1);
 //                }
-//                map.put(letters[r], r);
+//                map.put(cur, r);
+//                maxLen = Math.max(maxLen, r - l + 1);
 //            }
-//            return Math.max(count, map.size());
-            // 這邊改變一下寫法，這樣寫比較好懂，就是當重複的時候才更新 left 到重覆的下一個
-            // 沒有重複就繼續計算 maxLen 跟 放直到 map 內
-            for (int r = 0; r < s.length(); r++) {
-                char cur = letters[r];
-                if (map.containsKey(cur)) {
-                    l = Math.max(l, map.get(cur) + 1);
-                }
-                map.put(cur, r);
-                maxLen = Math.max(maxLen, r - l + 1);
-            }
-            return maxLen;
-        }
+//            return maxLen;
+//        }
 
         /**
          * Runtime: 1 ms, Beats 100.00%
@@ -80,5 +80,16 @@ public class Longest_Substring_Without_Repeating_Characters_3 {
 //            }
 //            return maxLen;
 //        }
+        public int lengthOfLongestSubstring(String s) {
+            char[] sChars = s.toCharArray();
+            int[] sIndex = new int[128];
+            int maxLen = 0;
+            for (int left = 0, right = 0; right < sChars.length; right++) {
+                if (sIndex[sChars[right]] > left) left = sIndex[sChars[right]];
+                maxLen = Math.max(maxLen, right - left + 1);
+                sIndex[sChars[right]] = right + 1;
+            }
+            return maxLen;
+        }
     }
 }

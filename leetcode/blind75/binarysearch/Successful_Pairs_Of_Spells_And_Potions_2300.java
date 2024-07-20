@@ -14,8 +14,8 @@ public class Successful_Pairs_Of_Spells_And_Potions_2300 {
         Successful_Pairs_Of_Spells_And_Potions_2300 s = new Successful_Pairs_Of_Spells_And_Potions_2300();
         Successful_Pairs_Of_Spells_And_Potions_2300.Solution solution = s.new Solution();
 
-        int[] spells = {5, 1, 3}, potions = {1, 2, 2, 4, 5};
-        int success = 10;
+        int[] spells = {5, 1, 3}, potions = {1, 2, 3, 4, 5};
+        int success = 7;
         int[] result = solution.successfulPairs(spells, potions, success);
 
         System.out.print("result: ");
@@ -27,9 +27,11 @@ public class Successful_Pairs_Of_Spells_And_Potions_2300 {
 
     class Solution {
         /**
+         * Runtime: 43 ms, Beats 28.39%
          * test1
          * 解法:
-         * 先把藥水做排序，這樣之後就可以挑選裡面最小的，然後再用 長度減去就可以知道該 spell 適用的組合
+         * 先把藥水做排序，使用 binay search 在每一次抓到的 potions[mid] * spell 去看是否 > success
+         * 要找最小的可能，最後再用長度 - 找到的 left
          * <p>
          * 排序使用到 O(n log n)
          * 雙指針(binary search)使用到 O(m log n)
@@ -60,11 +62,12 @@ public class Successful_Pairs_Of_Spells_And_Potions_2300 {
 //        }
 
         /**
+         * Runtime: 4 ms, Beats 100.00%
          * test2
          * 解法: 沒有用到 binary search，轉而使用 array 特性去紀錄位置跟數量
          * 1. 先去找最大的 potion
          * 2. 使用 array[] 計算每一個 potion 所擁有的瓶數 (因為有可能重複)
-         * 3. 因為 array 就已經排序好，所以去找到每一個 potoin 後面有多少瓶，這樣當找到一瓶後的位置後，就可以知道它後面的總和(因為第一瓶可以的話，後面就通通可以，因為已經排序過大小)
+         * 3. 利用 prefixSum 因為 array 就已經排序好，所以去找到每一個 potoin 後面有多少瓶，這樣當找到一瓶後的位置後，就可以知道它後面的總和(因為第一瓶可以的話，後面就通通可以，因為已經排序過大小)
          * 4. 使用 potion_max 去推出 spell_min
          * 5. 使用 for 去找到 spell[i] >= spell_min
          * 6. 如果有至少等於 spell_min 去找他至少符合那個 potion，找到後再去 array[i] 回傳答案
@@ -99,6 +102,8 @@ public class Successful_Pairs_Of_Spells_And_Potions_2300 {
                 pcouners[i] += pcouners[i + 1];
             }
             // 求 最小 spell，如果連最小都沒有滿足，等於整個 potions 都不用看
+            // spell * potion >= success; spell * maxp >= success; spell >= success / maxp
+            // 因為要找最小值，如果 spell 等於 1.2 就要找 2(向上取整) ，以下的算法等同 Math.ceil(success / maxp)
             long mins = (success + maxp - 1) / maxp;
 
             // 當 spell >= minspell, 尋找 potions 有多少個符合

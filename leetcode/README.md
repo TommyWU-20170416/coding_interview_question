@@ -72,6 +72,21 @@ Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0])); // 同等下面�
 Arrays.sort(intervals, Comparator.comparingInt((int[] a) -> a[0]).reversed()); // 這是由小大到排序後，再進行翻轉，就可以獲得由大到小
 Arrays.sort(intervals, (a, b) -> a[0] - b[0]); // 測試下來 比較快
 
+## ListNode
+
+### 翻轉
+
+[Reverse_Linked_List_206.java](blind75/linkedlist/Reverse_Linked_List_206.java)
+
+### 找中間位置
+
+### 變形練習
+
+- 變形:刪除中間
+  [Delete_The_Middle_Node_Of_A_Linked_List_2095.java](blind75/linkedlist/Delete_The_Middle_Node_Of_A_Linked_List_2095.java)
+- 變形翻轉找中間位置
+  [Maximum_Twin_Sum_Of_A_Linked_List_2130.java](blind75/linkedlist/Maximum_Twin_Sum_Of_A_Linked_List_2130.java)
+
 ## 陣列轉成 List
 
 List<int[]> result = new ArrayList<>();
@@ -86,9 +101,10 @@ result.toArray(new int[result.size()][]);
 ### hashmap
 
 ## Array
-### 陣列可以達到檢查順序不同的字母或數字
-[Find_All_Anagrams_in_a_String_438.java](grind75/string/Find_All_Anagrams_in_a_String_438.java)
 
+### 陣列可以達到檢查順序不同的字母或數字
+
+[Find_All_Anagrams_in_a_String_438.java](grind75/string/Find_All_Anagrams_in_a_String_438.java)
 
 ## 有名演算法
 
@@ -102,6 +118,23 @@ Boyer–Moore majority vote algorithm 多數投票演算法
 [Contains_Duplicate_217.java](grind75/array/Contains_Duplicate_217.java)
 
 ## 數學
+
+### 除法
+
+#### 向上取整 [Successful_Pairs_Of_Spells_And_Potions_2300.java](blind75/binarysearch/Successful_Pairs_Of_Spells_And_Potions_2300.java)
+
+ceil(5 / 2) => (a + b -1) / b = (5 + 2 - 1 / 2) = 3
+
+#### 向下取整(算出來是 2.5 但因為是 int 所以小數點會被自動砍掉)
+
+floor(5 / 2)=> (a / b) = 2
+
+#### 四捨五入
+
+round(5 / 2) 直接除 = 2.5 預期要變成 3
+=> (a + b / 2) / b = (5 + 2 / 2) / 2 = 3
+round(17/ 4) 直接除 = 4.25 預期要變成 4
+=> (a + b / 2) / b = (17+ 4 / 2) / 4 = 4
 
 ### 最大公因數
 
@@ -128,3 +161,24 @@ Boyer–Moore majority vote algorithm 多數投票演算法
 > gcd(a, a) = a <br/>
 > gcd(a, b) = gcd(a-b, b); a > b <br/>
 > gcd(a, b) = gcd(a, b-a); b > a <br/>
+
+## 大小寫轉換
+
+toLowercase [Valid_Palindrome_125.java](grind75/string/Valid_Palindrome_125.java)
+
+## 二分法
+
+[Time_Based_Key_Value_Store_981.java](grind75/binarysearch/Time_Based_Key_Value_Store_981.java)
+二分查找的最終狀態
+當目標值不在數組中時：
+start 是目標值應該插入的位置或第一個大於目標值的位置。
+end 是目標值應該插入的位置或最後一個小於目標值的位置。
+[-1, 0, 3, 5, 9, 12] 要找到 2
+第一次: [-1, 3, 12]
+第二次: [-1, 0, 0]
+第三次: [ 3, 0, 0]
+最後一個 < 2 的是 0，第一個 > 2 的是 3
+
+### 在重複的陣列中，找最小 index
+
+### 在重複的陣列中，找最大 index

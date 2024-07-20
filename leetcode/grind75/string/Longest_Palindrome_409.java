@@ -29,8 +29,7 @@ public class Longest_Palindrome_409 {
             for (char c : s.toCharArray()) {
                 letterS[c]++;
             }
-            int isThereOne = 0;
-            int sum = 0;
+            int isThereOne = 0, sum = 0;
             for (int i : letterS) {
                 if (i % 2 == 1) isThereOne = 1;
                 sum += i / 2;
