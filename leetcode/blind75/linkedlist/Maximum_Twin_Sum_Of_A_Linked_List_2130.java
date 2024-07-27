@@ -1,8 +1,11 @@
 package linkedlist;
-
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * 2130.https://leetcode.com/problems/maximum-twin-sum-of-a-linked-list/description/
+ *
+ * @author AaronWU
+ * @created 創建時間：2024/07/22 14:58:21
+ * @since JDK8.0
+ */
 public class Maximum_Twin_Sum_Of_A_Linked_List_2130 {
     public static void main(String[] args) {
         Maximum_Twin_Sum_Of_A_Linked_List_2130 s = new Maximum_Twin_Sum_Of_A_Linked_List_2130();
@@ -69,27 +72,55 @@ public class Maximum_Twin_Sum_Of_A_Linked_List_2130 {
 //            }
 //            return maxSum;
 //        }
+
+        /**
+         * Runtime: 3 ms, Beats 100.00%
+         * 這題使用 slow fast pointers 去找到中間的位置，並且搭配 reverse list 去做計算
+         * <pre>
+         * {@code
+         * 1    2    3    4    5    6
+         *      |    |
+         *    slow   |
+         *          fast
+         * 做完第一次 while 迴圈: slow 跟 fast 就往後跳
+         * head 變成 2    1    2    3    4    5    6
+         * 1    2    3    4    5    6
+         *           |         |
+         *         slow        |
+         *                    fast
+         * }
+         * 做完第二次 while 迴圈: slow 跟 fast 就往後跳
+         * head 變成 3    2    1    2    3    4    5    6
+         * 1    2    3    4    5    6
+         *                |             |
+         *              slow            |
+         *                            fast(null)
+         *
+         * 接著開始做計算，直到 slow 變成 null
+         * head 變成 3    2    1    2    3    4    5    6
+         * slow 變成 4    5    6
+         * }
+         * </pre>
+         */
         public int pairSum(ListNode head) {
-            ListNode mid = head.next;
-            ListNode tail = head.next.next;
-            ListNode n;
-            int max = 0;
-
-            while (tail != null) {
-                n = mid.next;
-                mid.next = head;
-                head = mid;
-                mid = n;
-                tail = tail.next.next;
+            ListNode slow = head.next, fast = head.next.next;
+            int sum = 0;
+            // 創建 reverse list 以及找到中間位置
+            while (fast != null) {
+                ListNode slowTmp = slow.next;
+                slow.next = head;
+                head = slow;
+                slow = slowTmp;
+                fast = fast.next.next;
             }
 
-            while (mid != null) {
-                max = Math.max(max, head.val + mid.val);
+            while (slow != null) {
+                if ((slow.val + head.val) > sum) sum = slow.val + head.val;
+                slow = slow.next;
                 head = head.next;
-                mid = mid.next;
             }
 
-            return max;
+            return sum;
         }
     }
 }

@@ -182,3 +182,9 @@ end 是目標值應該插入的位置或最後一個小於目標值的位置。
 ### 在重複的陣列中，找最小 index
 
 ### 在重複的陣列中，找最大 index
+
+
+## tree
+### 節點的高度（depth）
+在樹相關的問題中，return Math.max(leftHeight, rightHeight) + 1; 是一個常見的操作
+[Maximum_Depth_Of_Binary_Tree_104.java](grind75%2Fbinarytree%2FMaximum_Depth_Of_Binary_Tree_104.java)

@@ -45,11 +45,13 @@ public class Odd_Even_Linked_List_328 {
          * // 注意此時只是修改指向的位置 709 其實還在只是不再 練表內了
          * }
          * </pre>
-         *
-         * 因為 oddTmp.next = evenTmp.next; 使得跳脫條件要檢查 evenTmp 位置
+         * <p>
+         * 跳脫條件
+         * oddTmp.next = evenTmp.next; 使得跳脫條件要檢查 evenTmp 位置
+         * 如果是偶數個，因為偶數會先跑到最後，所以也要檢查 evenTmp.next         *
          */
         public ListNode oddEvenList(ListNode head) {
-            if (head == null || head.next == null) return head;
+            if (head == null     || head.next == null) return head;
             ListNode oddTmp = head, evenTmp = head.next;
             ListNode oddHead = oddTmp, evenHead = evenTmp;
             while (evenTmp != null && evenTmp.next != null) {
