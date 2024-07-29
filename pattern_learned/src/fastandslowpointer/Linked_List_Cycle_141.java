@@ -25,7 +25,7 @@ public class Linked_List_Cycle_141 {
 
     public static void main(String[] args) {
         Linked_List_Cycle_141 test = new Linked_List_Cycle_141();
-        System.out.println("hasCycle_Brute:" + test.hasCycle_Brute(head));
+        System.out.println("hasCycle_Brute:" + test.hasCycle_FastAndSlowPointer(head));
         System.out.println("hasCycle_FastAndSlowPointer:" + test.hasCycle_FastAndSlowPointer(head));
     }
 
@@ -51,31 +51,32 @@ public class Linked_List_Cycle_141 {
         return false;
     }
 
-    /**
-     * Runtime: 8 ms
-     * Memory Usage: 44.6 MB
-     * time:O(n) space:O(n)空間要多存n個紀錄，所以為n
-     *
-     * Brute Force紀錄每一個走過的值，找到走過的就是 return true
-     *
-     * @param head
-     * @return
-     */
-    public boolean hasCycle_Brute(ListNode head) {
-//		List<Integer> list = new LinkedList<Integer>();
-//		原本想說把 抓到的node的val存起來，藉此比對，但會發現一個問題就是這樣的node就不可以重複
-        Set<ListNode> set = new HashSet<ListNode>();
-        while (head != null) {
-            if (set.contains(head))
-                return true;
-
-            set.add(head);
-            // System.out.println(head.val);
-            head = head.next;
-            // System.out.println(head.val);
-        }
-        return false;
-
-    }
+//
+//    /**
+//     * Runtime: 8 ms
+//     * Memory Usage: 44.6 MB
+//     * time:O(n) space:O(n)空間要多存n個紀錄，所以為n
+//     *
+//     * Brute Force紀錄每一個走過的值，找到走過的就是 return true
+//     *
+//     * @param head
+//     * @return
+//     */
+//    public boolean hasCycle_Brute(ListNode head) {
+////		List<Integer> list = new LinkedList<Integer>();
+////		原本想說把 抓到的node的val存起來，藉此比對，但會發現一個問題就是這樣的node就不可以重複
+//        Set<ListNode> set = new HashSet<ListNode>();
+//        while (head != null) {
+//            if (set.contains(head))
+//                return true;
+//
+//            set.add(head);
+//            // System.out.println(head.val);
+//            head = head.next;
+//            // System.out.println(head.val);
+//        }
+//        return false;
+//
+//    }
 }
 

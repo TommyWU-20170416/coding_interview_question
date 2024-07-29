@@ -183,8 +183,36 @@ end 是目標值應該插入的位置或最後一個小於目標值的位置。
 
 ### 在重複的陣列中，找最大 index
 
-
 ## tree
+
 ### 節點的高度（depth）
+
 在樹相關的問題中，return Math.max(leftHeight, rightHeight) + 1; 是一個常見的操作
-[Maximum_Depth_Of_Binary_Tree_104.java](grind75%2Fbinarytree%2FMaximum_Depth_Of_Binary_Tree_104.java)
+[Maximum_Depth_Of_Binary_Tree_104.java](blind75/binarytree/dfs/Maximum_Depth_Of_Binary_Tree_104.java)
+
+### 當需要用到高度的時候
+
+- 這一題需要判斷當 "第一次" 到達某一層時要把該 node.val 存起來
+  [Binary_Tree_Right_Side_View_199.java](blind75/binarytree/Binary_Tree_Right_Side_View_199.java)
+- 這一題需要判斷抵達同一層要做什麼事情
+  [Binary_Tree_Level_Order_Traversal_102.java](grind75/binarytree/Binary_Tree_Level_Order_Traversal_102.java)
+
+### 提早結束 recursive
+
+通常都會用 if(node == null) return 0; 去判斷是否該 recursive 要結束，但如果再進入之前就判斷，就可以提早結束作業
+[test2 - Count_Good_Nodes_In_Binary_Tree_1448.java](blind75/binarytree/dfs/Count_Good_Nodes_In_Binary_Tree_1448.java)
+
+## recursive
+
+### 如果有想要操作 recursive 而且想要傳出一個 list 不想用額外的全域變數
+
+因為當參數引入 list 這種物件的時候，都是引用該變數，所以原本的值是會受影響的
+所以可以直接改不用特別 return
+[private void rightSideView_helper - Binary_Tree_Right_Side_View_199.java](blind75/binarytree/Binary_Tree_Right_Side_View_199.java)
+
+如果要 return 也可以
+[private List<Integer> leafStructure - Leaf_Similar_Trees_872.java](blind75/binarytree/dfs/Leaf_Similar_Trees_872.java)
+
+### 如果有想要操作 recursive 而且想要傳出一個 int ，不想用額外的全域變數，且這 int 可作加減
+
+[Count_Good_Nodes_In_Binary_Tree_1448.java](blind75/binarytree/dfs/Count_Good_Nodes_In_Binary_Tree_1448.java)

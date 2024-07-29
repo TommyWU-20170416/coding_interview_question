@@ -12,6 +12,11 @@ public class Path_Sum_112 {
         Path_Sum_112 s = new Path_Sum_112();
         Path_Sum_112.Solution solution = s.new Solution();
 
+        /**
+         * ------ 1
+         * --- 2    3
+         * - 4  5  6
+         */
         TreeNode t1 = new TreeNode(1);
         t1.left = new TreeNode(2, new TreeNode(4), new TreeNode(5));
         t1.right = new TreeNode(3, new TreeNode(6), null);
@@ -21,6 +26,11 @@ public class Path_Sum_112 {
         System.out.println(result);
     }
 
+    /**
+     * Runtime: 0 ms, Beats 100.00%
+     * 將 targetSum 帶入參數，並且會慢慢扣掉，當 扣掉的值 == 0 且在 leaf 節點
+     *
+     */
     class Solution {
         public boolean hasPathSum(TreeNode root, int targetSum) {
             if (root == null) return false;
@@ -28,15 +38,13 @@ public class Path_Sum_112 {
         }
 
         private boolean pathSum(TreeNode node, int currentSum) {
-            if (node == null) return false;
-
             int remain = currentSum - node.val;
             if (node.left == null && node.right == null) {
                 return remain == 0;
             }
 
-            boolean left = pathSum(node.left, remain);
-            boolean right = pathSum(node.right, remain);
+            boolean left = (node.left != null) ? pathSum(node.left, remain) : false;
+            boolean right = (node.right != null) ? pathSum(node.right, remain) : false;
 
             return left || right;
         }

@@ -20,33 +20,35 @@ public class Lowest_Common_Ancestor_Of_A_Binary_Tree_236 {
         TreeNode t1 = new TreeNode(1, new TreeNode(0), new TreeNode(8));
         TreeNode t = new TreeNode(3, t5, t1);
 
-        TreeNode p = new TreeNode(5), q = new TreeNode(1);
+        TreeNode p = t5, q = t5.right;
 
-        TreeNode result = solution.lowestCommonAncestor(t, t.left.right, t.left);
+        TreeNode result = solution.lowestCommonAncestor(t, p, q);
         System.out.println(result.val);
     }
 
-    class Solution {
-        /**
-         * test1
-         * 解法:
-         * 記錄根節點到 p 以及 q 的路徑
-         * 找到後會有兩個陣列紀錄資訊
-         * 比對這兩個陣列第一個分歧點之前的 node 就是 LCA
-         * <p>
-         * -----3
-         * ---/   \
-         * --5     1
-         * -/ \   / \
-         * 6  2  0  8
-         * --/ \
-         * -7  4
-         * <p>
-         * 假設 p = 5, q = 4
-         * p = 5, arrayP = [3, 5]
-         * q = 4, arrayQ = [3, 5, 2, 4]
-         * 5 就是LCA
-         */
+
+    /**
+     * Runtime: 9msBeats15.48%
+     * test1
+     * 解法:
+     * 記錄根節點到 p 以及 q 的路徑
+     * 找到後會有兩個陣列紀錄資訊
+     * 比對這兩個陣列第一個分歧點之前的 node 就是 LCA
+     * <p>
+     * -----3
+     * ---/   \
+     * --5     1
+     * -/ \   / \
+     * 6  2  0  8
+     * --/ \
+     * -7  4
+     * <p>
+     * 假設 p = 5, q = 4
+     * p = 5, arrayP = [3, 5]
+     * q = 4, arrayQ = [3, 5, 2, 4]
+     * 5 就是LCA
+     */
+//    class Solution {
 //        public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 //            List<TreeNode> listP = new ArrayList<>(), listQ = new ArrayList<>();
 //            findPath(root, p, listP);
@@ -71,51 +73,45 @@ public class Lowest_Common_Ancestor_Of_A_Binary_Tree_236 {
 //             * Q:不知道什麼時候才是要讓 TreeNode 加入到 list
 //             * A:就是都加，阿如果最後發現不是就移除
 //             */
-//            if (root == null)
-//                return false;
+//            if (root == null) return false;
 //            list.add(root);
 //
-//            if (root.val == target.val)
-//                return true;
+//            if (root.val == target.val) return true;
 //
-//            if (findPath(root.left, target, list))
-//                return true;
+//            if (findPath(root.left, target, list)) return true;
 //
-//            if (findPath(root.right, target, list))
-//                return true;
+//            if (findPath(root.right, target, list)) return true;
 //
 //            list.remove(list.size() - 1);
 //            return false;
 //        }
+//    }
+
+    class Solution {
+
 
         /**
+         * Runtime: 6 ms, Beats 100.00%
          * test2
          * 解法:
          * 此題目會有三種情境
          * 1. p 或 q 分別存在於 root 的左節點或右節點
          * 2. p 或 q 都存在於 root 的左節點
-         *      如果都在左邊，就看誰先被找到，找到的那一個就是 LCA
+         * 如果都在左邊，就看誰先被找到，找到的那一個就是 LCA
          * 3. p 或 q 都存在於 root 的右節點
-         *      如果都在右邊，就看誰先被找到，找到的那一個就是 LCA
+         * 如果都在右邊，就看誰先被找到，找到的那一個就是 LCA
          */
         public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-            return find(root, p, q);
-        }
-
-        private TreeNode find(TreeNode root, TreeNode p, TreeNode q) {
-            if (root == null) return null;
-            if (root == p || root == q) return root;
-
-            TreeNode left = find(root.left, p, q);
-            TreeNode right = find(root.right, p, q);
+            if (root == null)
+                return null;
+            if (root == p || root == q)
+                return root;
+            TreeNode left = lowestCommonAncestor(root.left, p, q);
+            TreeNode right = lowestCommonAncestor(root.right, p, q);
 
             if (left != null && right != null) return root;
-
-            if (left != null) return left;
-
-            if (right != null) return right;
-
-            return null;
+            else if (left != null) return left;
+            else return right;
         }
     }
 }

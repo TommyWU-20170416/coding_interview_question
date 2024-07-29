@@ -32,18 +32,40 @@ public class Binary_Tree_Right_Side_View_199 {
         List<Integer> result = solution.rightSideView(t1);
         System.out.println(result);
     }
+    /**
+     * Runtime: 1 ms, Beats 66.95%
+     * 只要我跟你同 level 就更新，因為是最右邊的，所以先走 left 再走 right 最後就會是最右邊的
+     */
+//    class Solution {
+//        private List<Integer> result = new ArrayList<>();
+//
+//        public List<Integer> rightSideView(TreeNode root) {
+//            if (root == null) return new ArrayList<>();
+//            rightSideView_dfs(root, 0);
+//            return result;
+//        }
+//
+//        private void rightSideView_dfs(TreeNode node, int level) {
+//            if (node == null) return;
+//            if (result.size() == 0 || result.size() <= level) {
+//                result.add(node.val);
+//            } else {
+//                result.remove(level);
+//                result.add(level, node.val);
+//            }
+//            rightSideView_dfs(node.left, level + 1);
+//            rightSideView_dfs(node.right, level + 1);
+//        }
+//    }
 
     /**
-     * 這題要找到每一層從最右側看過去的數值
+     * Runtime0msBeats100.00%
+     * 解法:
+     * 這題就是DFS + preorder
+     * 從 right 開始，先看到先記錄，若沒有則繼續往左找
+     * 厲害的是用 list.size() 判斷是否為第一次進這一層
      */
     class Solution {
-        /**
-         * test1
-         * 解法:
-         * 這題就是DFS + preorder
-         * 先看到先記錄，若沒有則繼續往左找
-         * 厲害的是用 list.size() 判斷是否為第一次進這一層
-         */
         public List<Integer> rightSideView(TreeNode root) {
             List<Integer> result = new ArrayList<>();
             if (root == null) return result;
@@ -51,16 +73,16 @@ public class Binary_Tree_Right_Side_View_199 {
             return result;
         }
 
-        private void rightSideView_helper(TreeNode node, List<Integer> result, int depth) {
+        private void rightSideView_helper(TreeNode node, List<Integer> result, int level) {
             if (node == null)
                 return;
 
-            if (depth == result.size()) {
+            if (level == result.size()) {
                 result.add(node.val);
             }
 
-            rightSideView_helper(node.right, result, depth + 1);
-            rightSideView_helper(node.left, result, depth + 1);
+            rightSideView_helper(node.right, result, level + 1);
+            rightSideView_helper(node.left, result, level + 1);
         }
     }
 }

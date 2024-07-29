@@ -35,9 +35,6 @@ public class Middle_of_the_Linked_List_876 {
      * 這題的 while 當 ListNode head 是奇數個，那麼當 fast 已經到最後的時候他的 next 就是 null，就代表他已經到底了
      * fast != null ==> 當偶數的時候，fast本身空的時間，就是到底了
      * fast.next != null ==> 當奇數的時候，fast.next 會是 null 就知道到底了
-     *
-     * @param head
-     * @return
      */
     public ListNode middleNode(ListNode head) {
         ListNode slow = head, fast = head;
@@ -50,10 +47,11 @@ public class Middle_of_the_Linked_List_876 {
     }
 
     /**
-     * 這樣寫可以少跑一次，因為 fast.next.next 先判斷了
-     *
-     * @param head
-     * @return
+     * 這樣寫雖然少跑一次，因為 fast.next.next 先判斷了，少的那一次會在 return 判斷
+     * 如果是奇數個，就是回傳 slow
+     * 如果是偶數個，因為做到 n - 1 的時候(ex: 6) 也就是 5，因為 fast.next.next = null
+     * 跳出去之後要在檢查 fast.next 是不是 null 如果是返回 slow
+     * 這是奇數的時候要多做的檢查
      */
     public ListNode middleNode2(ListNode head) {
         ListNode slow = head, fast = head;

@@ -1,5 +1,7 @@
 package binarytree.dfs;
 
+import javax.xml.stream.events.StartDocument;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,11 @@ public class Path_Sum_II_113 {
         Path_Sum_II_113 s = new Path_Sum_II_113();
         Path_Sum_II_113.Solution solution = s.new Solution();
 
+        /**
+         * ------ 1
+         * --- 2    3
+         * - 4  5  4
+         */
         TreeNode t1 = new TreeNode(1);
         t1.left = new TreeNode(2, new TreeNode(4), new TreeNode(5));
         t1.right = new TreeNode(3, new TreeNode(4), null);
@@ -24,6 +31,9 @@ public class Path_Sum_II_113 {
         System.out.println(result);
     }
 
+    /**
+     * Runtime: 1 ms, Beats 99.66%
+     */
     class Solution {
         public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
             if (root == null) return new ArrayList<>();
