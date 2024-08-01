@@ -29,16 +29,22 @@ public class Delete_Node_In_A_BST_450 {
 //        int val = 7; // delete without right
 //        int val = 1; // delete without children
 
-        TreeNode t = new TreeNode(5,
-                new TreeNode(3, new TreeNode(2), new TreeNode(4)),
-                new TreeNode(6, null, new TreeNode(7)));
-        int val = 5;
+        /**
+         * ----- 5
+         * --- 3    6
+         * - 2   4 X  7
+         */
+        TreeNode t = new TreeNode(5, new TreeNode(3, new TreeNode(2), new TreeNode(4)), new TreeNode(6, null, new TreeNode(7)));
+        int val = 3;
 
         TreeNode result = solution.deleteNode(t, val);
 
         System.out.println(result);
     }
 
+    /**
+     * Runtime: 0 ms, Beats 100.00%
+     */
     class Solution {
         public TreeNode deleteNode(TreeNode root, int key) {
             if (root == null) return null;

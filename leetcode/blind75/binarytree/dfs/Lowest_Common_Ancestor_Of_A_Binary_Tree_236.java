@@ -28,7 +28,7 @@ public class Lowest_Common_Ancestor_Of_A_Binary_Tree_236 {
 
 
     /**
-     * Runtime: 9msBeats15.48%
+     * Runtime: 9 ms, Beats 15.48%
      * test1
      * 解法:
      * 記錄根節點到 p 以及 q 的路徑

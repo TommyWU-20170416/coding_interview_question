@@ -2,8 +2,7 @@ package binarytree;
 
 import binarytree.dfs.TreeNode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 199.https://leetcode.com/problems/binary-tree-right-side-view/description/
@@ -65,24 +64,61 @@ public class Binary_Tree_Right_Side_View_199 {
      * 從 right 開始，先看到先記錄，若沒有則繼續往左找
      * 厲害的是用 list.size() 判斷是否為第一次進這一層
      */
+//    class Solution {
+//        public List<Integer> rightSideView(TreeNode root) {
+//            List<Integer> result = new ArrayList<>();
+//            if (root == null) return result;
+//            rightSideView_helper(root, result, 0);
+//            return result;
+//        }
+//
+//        private void rightSideView_helper(TreeNode node, List<Integer> result, int level) {
+//            if (node == null)
+//                return;
+//
+//            if (level == result.size()) {
+//                result.add(node.val);
+//            }
+//
+//            rightSideView_helper(node.right, result, level + 1);
+//            rightSideView_helper(node.left, result, level + 1);
+//        }
+//    }
+
+    /**
+     * Runtime: 1 ms, Beats 67.04%
+     * dfs 可以馬上加入 result 是因為他一層層下去，可是 bfs 是做完一層才下去
+     * 加入初始 node，第一層只有 1 個 node，下一層有 2 個
+     * 加入 2 個 node，等 2 個 node 跑完，最後一個就加入到 result 內，下一層有 3 個
+     * 依此類推，直到都沒有 node
+     */
     class Solution {
         public List<Integer> rightSideView(TreeNode root) {
             List<Integer> result = new ArrayList<>();
             if (root == null) return result;
-            rightSideView_helper(root, result, 0);
+            rightSideView_bfs(root, result);
             return result;
         }
 
-        private void rightSideView_helper(TreeNode node, List<Integer> result, int level) {
-            if (node == null)
-                return;
+        private void rightSideView_bfs(TreeNode node, List<Integer> result) {
+            Queue<TreeNode> q = new ArrayDeque<>();
+            q.add(node);
 
-            if (level == result.size()) {
-                result.add(node.val);
+            while (!q.isEmpty()) {
+                int size = q.size();
+                for (int i = 0; i < size; i++) {
+                    TreeNode tmp = q.poll();
+                    if (i == size - 1) {
+                        result.add(tmp.val);
+                    }
+                    if (tmp.left != null) {
+                        q.add(tmp.left);
+                    }
+                    if (tmp.right != null) {
+                        q.add(tmp.right);
+                    }
+                }
             }
-
-            rightSideView_helper(node.right, result, level + 1);
-            rightSideView_helper(node.left, result, level + 1);
         }
     }
 }

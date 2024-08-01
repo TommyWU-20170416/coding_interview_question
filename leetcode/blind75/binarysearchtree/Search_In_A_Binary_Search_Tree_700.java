@@ -20,7 +20,7 @@ public class Search_In_A_Binary_Search_Tree_700 {
         //  / \   / \
         // 1   3
         TreeNode t = new TreeNode(4, new TreeNode(2, new TreeNode(1), new TreeNode(3)), new TreeNode(7));
-        int val = 2;
+        int val = 1;
         TreeNode result = solution.searchBST(t, val);
 
         System.out.println(result);
