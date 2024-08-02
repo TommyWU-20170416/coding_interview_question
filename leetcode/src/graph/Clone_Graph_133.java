@@ -18,6 +18,9 @@ public class Clone_Graph_133 {
         Clone_Graph_133 s = new Clone_Graph_133();
         Clone_Graph_133.Solution solution = s.new Solution();
 
+        // 1 - 4
+        // |   |
+        // 2 - 3
         Node node = new Node(1);
         Node node2 = new Node(2);
         Node node3 = new Node(3);
@@ -76,9 +79,14 @@ public class Clone_Graph_133 {
 //        }
 
         /**
+         * Runtime: 23 ms, Beats 100.00%
          * test2
          * 解法
          * 把 test1 的 get_cloned_node 整併到 clone 內
+         *
+         * 把 node 複製到 cloneNode，接著放進 map 紀錄已經處理過的避免後面重複
+         * 接著看 node.neighbors 然後再呼叫 dfs 去找下一層 鄰居，找到底後再放回 cloneNode.neighbors 內
+         * 一路往回走直到做完
          *
          */
         public Node cloneGraph(Node node) {
@@ -94,7 +102,9 @@ public class Clone_Graph_133 {
 
             clonedMap.put(node, cloneNode);
             for (Node n : node.neighbors) {
-                cloneNode.neighbors.add(clone(n, clonedMap));
+                Node neighbor = clone(n, clonedMap);
+                System.out.println("cloneNode:" + cloneNode.val + ", neighbor:" + neighbor.val);
+                cloneNode.neighbors.add(neighbor);
             }
 
             return cloneNode;
