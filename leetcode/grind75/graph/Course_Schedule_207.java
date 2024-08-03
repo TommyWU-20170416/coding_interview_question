@@ -89,81 +89,40 @@ public class Course_Schedule_207 {
      * !! 因為先修課程是有可能重疊的，例如要先修 0 才可以上 1 跟 2，這樣子用 0 去追究可以 0 > 1 > 2
      * 但如果以 課程當 key 就要追三次 0 > X、1 > 0、2 > 0
      */
-//    class Solution {
-//        public boolean canFinish(int numCourses, int[][] prerequisites) {
-//            List<Integer>[] graph = new ArrayList[numCourses];
-//            // 初始化
-//            for (int i = 0; i < numCourses; i++) {
-//                graph[i] = new ArrayList<>();
-//            }
-//            // 把 pre & course 放進 graph
-//            for (int[] prerequisite : prerequisites) { // [先修課程: 課程]
-//                int course = prerequisite[0], pre = prerequisite[1];
-//                graph[course].add(pre);
-//            }
-//            int visited[] = new int[numCourses];
-//            for (int i = 0; i < numCourses; i++) {
-//                // visited[i] == 0 初始值
-//                if (visited[i] == 0 && hasCycle(graph, visited, i)) {
-//                    return false;
-//                }
-//            }
-//            return true;
-//        }
-//
-//        // true: 重複了、false: 沒有重複
-//        public boolean hasCycle(List<Integer> graph[], int visited[], int course) {
-//            if (visited[course] == 1) return true;
-//            if (visited[course] == 2) return false;
-//
-//            visited[course] = 1; // 拜訪過
-//            for (int neighbor : graph[course]) {
-//                if (hasCycle(graph, visited, neighbor)) {
-//                    return true; // 若 return true 表示被拜訪過，代表重複了，所以回傳上一層
-//                }
-//            }
-//            visited[course] = 2; // 拜訪過但是不重複
-//            return false;
-//        }
-//    }
     class Solution {
-        public int[] visited;
-
         public boolean canFinish(int numCourses, int[][] prerequisites) {
-            // create graph:{course: pre > pre2}
-            // graph:{0: 1 > 2 > 3} => {1. 0}{2, 0}{3, 0}
             List<Integer>[] graph = new ArrayList[numCourses];
-            int[] visited = new int[numCourses];
-            // init graph
+            // 初始化
             for (int i = 0; i < numCourses; i++) {
                 graph[i] = new ArrayList<>();
             }
-            // put the pre into graph
-            for (int i = 0; i < prerequisites.length; i++) {
-                int course = prerequisites[i][0], pre = prerequisites[i][1];
+            // 把 pre & course 放進 graph
+            for (int[] prerequisite : prerequisites) { // [先修課程: 課程]
+                int course = prerequisite[0], pre = prerequisite[1];
                 graph[course].add(pre);
             }
-            // use dfs to find that the path can finish
+            int visited[] = new int[numCourses];
             for (int i = 0; i < numCourses; i++) {
-                if (visited[i] == 0 && hasCycle(i, graph))
+                // visited[i] == 0 初始值
+                if (visited[i] == 0 && hasCycle(graph, visited, i)) {
                     return false;
+                }
             }
             return true;
         }
 
-        public boolean hasCycle(int course, List<Integer>[] graph) {
-            if (visited[course] == 1)
-                return true; // 1 表示拜訪過
-            if (visited[course] == 2)
-                return false;// 2 表示拜訪過但不重複
-            visited[course] = 1;
+        // true: 重複了、false: 沒有重複
+        public boolean hasCycle(List<Integer> graph[], int visited[], int course) {
+            if (visited[course] == 1) return true;
+            if (visited[course] == 2) return false;
 
-            List<Integer> preList = graph[course];
-            for (int pre : preList) {
-                if (hasCycle(pre, graph))
-                    return true;
+            visited[course] = 1; // 拜訪過
+            for (int neighbor : graph[course]) {
+                if (hasCycle(graph, visited, neighbor)) {
+                    return true; // 若 return true 表示被拜訪過，代表重複了，所以回傳上一層
+                }
             }
-            visited[course] = 2;
+            visited[course] = 2; // 拜訪過但是不重複
             return false;
         }
     }
