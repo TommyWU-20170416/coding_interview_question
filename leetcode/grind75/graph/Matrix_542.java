@@ -15,16 +15,23 @@ public class Matrix_542 {
         Matrix_542 ss = new Matrix_542();
         Matrix_542.Solution solution = ss.new Solution();
 //        int[][] mat = {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}};
-        int[][] mat = {{1, 1}, {1, 0}};
+//        int[][] mat = {{1, 1}, {1, 0}};
+
+        int[][] mat = {{0, 1, 0, 1, 1}, {1, 1, 0, 0, 1}, {0, 0, 0, 1, 0}, {1, 0, 1, 1, 1}, {1, 0, 0, 0, 1}};
         int[][] result = solution.updateMatrix(mat);
         System.out.print(result);
     }
 
     /**
-     * Runtime14msBeats62.68%
+     * Runtime: 14 ms, Beats 62.68%
      * 使用 BFS
-     * 創建 dist 把非 0 的都先改成 Integer.MAX_VALUE，等於 0 的時候 q.add() 讓後面知道說這幾個加入的點是要去看得
-     *
+     * 創建 dist 把非 0 的都先改成 Integer.MAX_VALUE，等於 0 的時候 q.add()
+     * ex:
+     * 原本           dist
+     * 0 | 0      max | max       max | 1        2 | 1
+     * -----  =>  ---------   =>  ---------  =>  -----
+     * 0 | 0      max |  0         1  | 0        1 | 0
+     * (0, 1)max 計算是從下面的 0 + 1 而得到，這也就是為什麼要儲存 0 而不是 1，因為 0 才是起始位置
      */
 //    class Solution {
 //        public int[][] updateMatrix(int[][] mat) {
@@ -51,12 +58,10 @@ public class Matrix_542 {
 //            // 0  0  0
 //            while (!q.isEmpty()) {
 //                int[] current = q.poll();
-//                int currentRow = current[0];
-//                int currentCol = current[1];
+//                int currentRow = current[0], currentCol = current[1];
 //
 //                for (int[] direction : directions) {
-//                    int newRow = currentRow + direction[0];
-//                    int newCol = currentCol + direction[1];
+//                    int newRow = currentRow + direction[0], newCol = currentCol + direction[1];
 //
 //                    if (newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
 //                        if (dist[newRow][newCol] > dist[currentRow][currentCol] + 1) { // 如果該點原本是 1 就會是 MAX 然後比較 MAX > 0 + 1 就打該點更新為 1
@@ -83,7 +88,7 @@ public class Matrix_542 {
             // 左上 > 右下 看 top left
             for (int i = 0; i < m; i++) {
                 for (int j = 0; j < n; j++) {
-                    if (mat[i][j] == 0)
+                    if (mat[i][j] == 0) // 如果判斷 1 這樣超過 1 的就會被遺忘
                         continue;
                     int top = (i - 1 >= 0) ? mat[i - 1][j] : max;
                     int left = (j - 1 >= 0) ? mat[i][j - 1] : max;
@@ -106,5 +111,4 @@ public class Matrix_542 {
             return mat;
         }
     }
-
 }
