@@ -56,31 +56,26 @@ public class Reverse_Words_In_A_String_151 {
          * 6. res 會 + 1 是因為最後會多一個空格，所以return 要砍掉
          */
         public String reverseWords(String s) {
-            char[] str = s.toCharArray();
-            char[] res = new char[s.length() + 1];
-
-            int start = s.length() - 1;
-            int end;
-            int count = 0;
+            char[] inputChar = s.toCharArray(), result = new char[s.length() + 1]; // 因為每次都會多加一個空格，最後會減掉
+            int start = s.length() - 1, end, len_result = 0;
 
             while (start >= 0) {
-                while (start >= 0 && str[start] == ' ') {
+                while (start >= 0 && inputChar[start] == ' ') {
                     start--;
                 }
-                if (start == -1) break;
+                if (start == -1) break; // 這是為了避免當剩下空格的時候
                 end = start;
-                while (start >= 0 && str[start] != ' ') {
+                while (start >= 0 && inputChar[start] != ' ') {
                     start--;
                 }
+                // 注意這邊 start + 1 是因為他是找到空白才停止，空白後面才是單字的開頭
                 for (int i = start + 1; i <= end; i++) {
-                    res[count] = str[i];
-                    count++;
+                    result[len_result++] = inputChar[i];
                 }
-                res[count] = ' ';
-                count++;
+                result[len_result++] = ' ';
             }
 
-            return new String(res, 0, count - 1);
+            return new String(result, 0, len_result - 1);
         }
     }
 }

@@ -22,6 +22,10 @@ public class Reorder_Routes_To_Make_All_Paths_Lead_To_The_City_Zero_1466 {
         System.out.println("result: " + result);
     }
 
+    /**
+     * Runtime: 32 ms, Beats 93.92%
+     *
+     */
     class Solution {
         public int minReorder(int n, int[][] connections) {
             List<List<int[]>> graph = new ArrayList<>();

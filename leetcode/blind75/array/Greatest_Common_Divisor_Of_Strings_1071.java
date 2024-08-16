@@ -49,41 +49,6 @@ class Greatest_Common_Divisor_Of_Strings_1071_Solution {
     /**
      * Runtime: 0 ms, Beats 100.00%
      * <ul>設計思維</ul>
-     * gcd(a, b) if(a == b) return a
-     * gcd(a, b) if(a > b) gcd(a-b, b)
-     * gcd(a, b) if(a < b) gcd(a, b-a)
-     * a - b 就是從 0 開始把 兩邊有的扣掉
-     * ABABAB, ABAB
-     * => AB, ABAB
-     * => AB, AB => AB
-     */
-    public String gcdOfStrings(String str1, String str2) {
-        int index = 0;
-        if (str1.length() > str2.length()) {
-            // 提早前檢查是否裡面有不一樣的字，但如果拿掉也可以正常運作
-            for (int i = 0; i < str2.length(); i++) {
-                if (str1.charAt(i) == str2.charAt(i)) index++;
-                else break;
-            }
-            return index == 0 ? "" : gcdOfStrings(str1.substring(index, str1.length()), str2);
-        } else if (str1.length() < str2.length()) {
-            // 提早前檢查是否裡面有不一樣的字，但如果拿掉也可以正常運作
-            for (int i = 0; i < str1.length(); i++) {
-                if (str2.charAt(i) == str1.charAt(i)) index++;
-                else break;
-            }
-            return index == 0 ? "" : gcdOfStrings(str1, str2.substring(index, str2.length()));
-        } else if (str1.equals(str2)) {
-            return str1;
-        }
-        return "";
-    }
-
-    // ------------------ test3 ------------------
-
-    /**
-     * Runtime: 0 ms, Beats 100.00%
-     * <ul>設計思維</ul>
      * 網路大神補充
      * 因為是找最大公因數，以字串來說 s = t + t + ... t
      * 所以 s + t = t + s => (t+t+t...) + t = t + (t+t+t...)
@@ -97,6 +62,24 @@ class Greatest_Common_Divisor_Of_Strings_1071_Solution {
 //        return str2.substring(0, end);
 //    }
 //
+//    public int gcd(int num1, int num2) {
+//        if (num2 == 0) return num1;
+//        return gcd(num2, num1 % num2);
+//    }
+    public String gcdOfStrings(String str1, String str2) {
+        if (!((str1 + str2).equals(str2 + str1))) return "";
+        // gcd the len
+        return str1.substring(0, gcd(str1.length(), str2.length()));
+    }
+
+    public int gcd(int num1, int num2) {
+        if (num1 > num2)
+            return gcd(num1 - num2, num2);
+        else if (num1 < num2)
+            return gcd(num2 - num1, num1);
+        return num1;
+    }
+    // 這也是找 GCD 只是他是用 % 的方式，但這種寫法，參數大的要擺第一個，某則會多做一次
 //    public int gcd(int num1, int num2) {
 //        if (num2 == 0) return num1;
 //        return gcd(num2, num1 % num2);

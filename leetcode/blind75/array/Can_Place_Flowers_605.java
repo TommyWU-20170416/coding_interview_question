@@ -19,8 +19,8 @@ public class Can_Place_Flowers_605 {
     public static void main(String[] args) {
         Can_Place_Flowers_605 ss = new Can_Place_Flowers_605();
         Can_Place_Flowers_605.Solution s = ss.new Solution();
-//        int[] flowerbed = {1, 0, 0, 0, 1};
-        int[] flowerbed = {0, 1, 0, 0, 1};
+        int[] flowerbed = {1, 0, 0, 0, 0};
+//        int[] flowerbed = {0, 1, 0, 0, 1};
         int n = 1;
         boolean b = s.canPlaceFlowers(flowerbed, n);
         System.out.println(b);
@@ -52,11 +52,12 @@ public class Can_Place_Flowers_605 {
 //        }
 
         /**
-         * 如果都是 0，下一個插花的距離就是往後 + 2
-         * 一次跳兩格，若到了 0 但不能插花 就多 +1 格
-         * i == len - 1；如果倒數第二個是 0 ，最後一個也就可以插花，倒數第二個是否等於 0 會在上一次的 flowerbed[i] == flowerbed[i + 1] 檢查過
-         * 這個也是確保最後不會溢位
-         * 滿巧妙的思考，一次往後跳兩隔，但同時也檢查下一個是不是 0
+         * 如果是 0
+         * > 且當前位置跟下一個一樣，代表可以插花，插完之後跳 2 格
+         * > 且位置是最後一筆資料
+         * > 但不滿足上述條件，則 i + 1 等於一次跳三個，因為代表已經插過花了
+         *
+         * 如果是 1 往後跳 2 個
          */
         public boolean canPlaceFlowers(int[] flowerbed, int n) {
             int len = flowerbed.length;

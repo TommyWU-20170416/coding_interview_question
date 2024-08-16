@@ -43,41 +43,6 @@ public class Reverse_Vowels_Of_A_String_345 {
 
     class Solution {
         /**
-         * test1
-         * 使用方法:
-         * 使用兩個 pointer 對應到前後，遇到母音就交換
-         */
-//        public String reverseVowels(String s) {
-//            char[] word = s.toCharArray();
-//            int i_left = 0;
-//            int i_right = s.length() - 1;
-//            String vowels = "aeiouAEIOU";
-//
-//            while (i_left < i_right) {
-//                // left >> util meet the vowel
-//                while (i_left < i_right && vowels.indexOf(word[i_left]) == -1) {
-//                    i_left++;
-//                }
-//
-//                // right >> util meet the vowel
-//                while (i_left < i_right && vowels.indexOf(word[i_right]) == -1) {
-//                    i_right--;
-//                }
-//
-//                // swap
-//                if (i_left < i_right) {
-//                    char tmp = word[i_left];
-//                    word[i_left] = word[i_right];
-//                    word[i_right] = tmp;
-//                    i_left++;
-//                    i_right--;
-//                }
-//            }
-//
-//            return new String(word);
-//        }
-
-        /**
          * Runtime: 1 ms, Beats 100.00% O(n)
          * test2
          * 使用方法:
@@ -96,25 +61,22 @@ public class Reverse_Vowels_Of_A_String_345 {
             isVowels['O'] = true;
             isVowels['U'] = true;
             char[] word = s.toCharArray();
-            int i_left = 0;
-            int i_right = s.length() - 1;
+            int left = 0;
+            int right = s.length() - 1;
 
-            while (i_left < i_right) {
-                // 如果這邊用 if 替換，每一次近來只做一次，下一次要等到最外層 while 再呼叫近來
-                // 理論上這樣會比較慢，所以使用 while 當下處理完比較快
-                // 只是 leetcode 測出來一樣的 time complexity
-                while (i_left < i_right && !isVowels[word[i_left]]) {
-                    i_left++;
+            while (left < right) {
+                while (left < right && !isVowels[word[left]]) {
+                    left++;
                 }
-                while (i_left < i_right && !isVowels[word[i_right]]) {
-                    i_right--;
+                while (left < right && !isVowels[word[right]]) {
+                    right--;
                 }
-
-                char tmp = word[i_left];
-                word[i_left] = word[i_right];
-                word[i_right] = tmp;
-                i_left++;
-                i_right--;
+                if(left == right) break; // 可以少做一次，但就要多判斷
+                char tmp = word[left];
+                word[left] = word[right];
+                word[right] = tmp;
+                left++;
+                right--;
             }
             return new String(word);
         }

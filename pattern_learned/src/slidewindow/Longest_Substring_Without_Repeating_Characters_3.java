@@ -46,79 +46,27 @@ public class Longest_Substring_Without_Repeating_Characters_3 {
     }
 
     /**
-     * Runtime: 6 ms, Memory Usage: 39 MB
-     *
-     * @param s
-     * @return
+     * Runtime: 1 ms, Beats 100.00%
+     * 很酷的解法
+     * 他使用 charIndex[s.charAt(right)] 紀錄這個字是在陣列中的哪個位置
+     * 如果今天不重複 left 都是 0，如果遇到重複，l 就會是上一次出現的那個位置
+     * 重要!!
+     * 每一次他都會去計算 max，所以不用像上面那樣，還要判斷當有重複才算 max
      */
     public int lengthOfLongestSubstring(String s) {
-
-        /**
-         * https://leetcode.com/problems/longest-substring-without-repeating-characters/solutions/4043492/best-and-understandable-code-in-java/
-         */
-//        HashMap<Character, Integer> map = new HashMap<>();
-//        int max = 0;
-//        int low = 0;
-//        for (int i = 0; i < s.length(); i++) {
-//            char curr = s.charAt(i);
-//            if (map.containsKey(curr)) {
-//                // 當有重複，跳到重覆後面的位置當作不重複的起始點
-//                low = Math.max(low, map.get(curr) + 1);
-//            }
-//            map.put(curr, i);
-//            max = Math.max(max, i - low + 1);
-//        }
-//        return max;
-
-        //        Set set = new HashSet();
-//        int windowStart = 0, windowEnd = 0, maxLength = 0;
-//        while (windowEnd < s.length()) {
-//            if (set.contains(s.charAt(windowEnd))) {
-//                set.remove(s.charAt(windowStart));
-//                windowStart++;
-//            } else {
-//                set.add(s.charAt(windowEnd));
-//                maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
-//                windowEnd++;
-//            }
-//        }
-//        return maxLength;
-//		Set<Character> set = new HashSet<Character>();
-//		int maxLength = 0, window_start = 0, window_end = 0;
-//		int count = 0;
-//		/* abcabcbb */
-//		while (window_end < s.length()) {
-//			System.out.println("count:" + count);
-//			count++;
-//			if (set.contains(s.charAt(window_end))) {
-//				set.remove(s.charAt(window_start));
-//				window_start++;
-//			} else {
-//				set.add(s.charAt(window_end));
-//				maxLength = Math.max(maxLength, window_end - window_start + 1);
-//				window_end++;
-//			}
-//
-//		}
-//
-//		return maxLength;
-        if (s.isEmpty())
+        if (s.length() == 0)
             return 0;
 
-        int[] charIndex = new int[128]; // 僅限定
-
-        int maxLength = 0;
-        int start = 0;
-
-        for (int end = 0; end < s.length(); end++) {
-            char c = s.charAt(end);
-            if (charIndex[c] > start) {
-                start = charIndex[c];
+        int[] records = new int[128]; // 儲存的位置是從 1 開始算
+        int maxLen = 0;
+        // 假設 abcc，left 可以快速指定到 3 而不是 2
+        for (int left = 0, right = 0; right < s.length(); right++) {
+            if (records[s.charAt(right)] > left) {
+                left = records[s.charAt(right)];
             }
-            charIndex[c] = end + 1;
-            maxLength = Math.max(maxLength, end - start + 1);
+            maxLen = Math.max(maxLen, right - left + 1);
+            records[s.charAt(right)] = right + 1;
         }
-
-        return maxLength;
+        return maxLen;
     }
 }

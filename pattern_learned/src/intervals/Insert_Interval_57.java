@@ -29,6 +29,7 @@ public class Insert_Interval_57 {
         int[][] result = s.insert(intervals, newInterval);
 
         System.out.println("reuslt:" + result);
+
     }
 
     /**
@@ -45,8 +46,7 @@ public class Insert_Interval_57 {
             // add intervals before newInterval
             // 如果 end < new start 就可以加入，這邊會把不重疊且又比 newInterval[0] 小的放進 result
             while (i < n && intervals[i][1] < newInterval[0]) {
-                result.add(intervals[i]);
-                i++;
+                result.add(intervals[i++]);
             }
 
             // combine interval and newInterval overlap
@@ -66,12 +66,6 @@ public class Insert_Interval_57 {
             }
 
             return result.toArray(new int[result.size()][]);
-            // 實測不會比較快
-//            int[][] res = new int[result.size()][];
-//            for (int j = 0; j < ; j++) {
-//                res[j] = result.get(j);
-//            }
-//            return res;
         }
     }
 }

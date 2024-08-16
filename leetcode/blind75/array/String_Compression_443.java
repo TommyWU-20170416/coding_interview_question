@@ -2,6 +2,7 @@ package array;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 /**
  * 443.https://leetcode.com/problems/string-compression/description/
  *
@@ -20,8 +21,8 @@ public class String_Compression_443 {
         String_Compression_443 r = new String_Compression_443();
         String_Compression_443.Solution s = r.new Solution();
 
-//        char[] chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'}; // Return 6
-        char[] chars = {'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'}; // Return 4
+        char[] chars = {'a', 'a', 'b', 'b', 'c', 'c', 'c'}; // Return 6
+//        char[] chars = {'a', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'}; // Return 4
 //        char[] chars = {'a', 'a', 'a', 'b', 'b', 'a', 'a'}; // Return 6   ['a','3','b','2','a','2']
 
         int result = s.compress(chars);
