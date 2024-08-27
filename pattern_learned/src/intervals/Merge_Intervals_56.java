@@ -71,6 +71,7 @@ public class Merge_Intervals_56 {
         public int[][] merge(int[][] intervals) {
             Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
             List<int[]> result = new ArrayList<>();
+            result.add(intervals[0]);
             int[] lastInterval = intervals[0];
 
             for (int[] interval : intervals) {

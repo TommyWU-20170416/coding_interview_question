@@ -1,7 +1,9 @@
 package array;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 217.https://leetcode.com/problems/contains-duplicate/description/
@@ -32,59 +34,47 @@ public class Contains_Duplicate_217 {
         int count = 0;
 
         /**
-         * Runtime: 30 ms, Beats 5.19% O(n)
+         * Runtime: 8 ms, Beats 92.05%
          * 使用 map 預紀錄每一次出現的次數
          */
-//        public boolean containsDuplicate(int[] nums) {
-//            Map<Integer, Integer> map = new HashMap<>();
-//            for (int num : nums) {
-//                count++;
-//                if (map.containsKey(num)) {
-//                    map.put(num, map.get(num) + 1);
-//                } else {
-//                    map.put(num, 1);
-//                }
-//            }
-//            for (int num : nums) {
-//                if (map.get(num) >= 2) {
-//                    System.out.println(count);
-//                    return true;
-//                }
-//            }
-//            System.out.println(count);
-//            return false;
-//        }
+        public boolean containsDuplicate(int[] nums) {
+            Set<Integer> set = new HashSet<>();
+            for(int num : nums){
+                if(!set.add(num)){
+                    return true;
+                }
+            }
+            return false;
+        }
 
         /**
          * Runtime: 2 ms, Beats: 99.81% O(n^2)
+         * 理論上第二個方法如果是在極端直，也就是第一個跟最後一個重複，就要跑O(n^2)
+         *
          * 如果 當前 跟上一個一樣就 return true
          * 如果 當前 比上一個小，有可能在這之前有跟我重複的
          * 所以使用 For 往回找，如果沒有就跟隔壁交換，達到數字越大的往後移動
          * <p>
          * 透過數字最大的往後，可以判斷這個數字大的以前有可能有重複
          */
-        public boolean containsDuplicate(int[] nums) {
-            for (int i = 1; i < nums.length; i++) {
-                count++;
-                if (nums[i] == nums[i - 1]) {// 如果跟上一個一樣就 return true
-                    System.out.println("count " + count);
-                    return true;
-                } else if (nums[i] < nums[i - 1]) {
-                    for (int j = i - 1; j >= 0; j--) {
-                        count++;
-                        if (nums[i] == nums[j]) {
-                            System.out.println("count " + count);
-                            return true;
-                        }
-                    }
-                    int temp = nums[i];
-                    nums[i] = nums[i - 1];
-                    nums[i - 1] = temp;
-                }
-
-            }
-            System.out.println("count " + count);
-            return false;
-        }
+//        public boolean containsDuplicate(int[] nums) {
+//            for (int i = 1; i < nums.length; i++) {
+//                if (nums[i] == nums[i - 1]) {// 如果跟上一個一樣就 return true
+//                    return true;
+//                } else if (nums[i - 1] > nums[i]) {
+//                    // 往前找之前有沒有重複的
+//                    for (int j = i - 1; j >= 0; j--) {
+//                        if (nums[i] == nums[j]) {
+//                            return true;
+//                        }
+//                    }
+//                    // 把大的往後放，接下來比大的還要小就可能存在重複，所以只要交換一個就好不用把小的放到最前面
+//                    int temp = nums[i];
+//                    nums[i] = nums[i - 1];
+//                    nums[i - 1] = temp;
+//                }
+//            }
+//            return false;
+//        }
     }
 }

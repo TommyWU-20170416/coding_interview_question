@@ -25,82 +25,69 @@ public class Combination_Sum_39 {
         System.out.print(result);
     }
 
+    /**
+     * Runtime: 2 ms, Beats 84.00%
+     * 使用遞迴的方式，每一次進去都要做遍歷，去檢查每一個組合
+     */
     class Solution {
-        private int count = 1;
+        private List<List<Integer>> result = new ArrayList<>();
 
-        /**
-         * test1
-         * 解法:
-         * 先排序，並使用 recursive 抓出每一個的結果
-         * 1. 如果 target - 當前 < 0 表示太大，則要把該數字拿掉往後尋找
-         * 2. 如果 target - 當前 ==0 表示找到了，要新增到 result 內，tempList 因為要沿用所以 new 出來放到 result 內
-         * 3. 如果不是上述的情況，就繼續累加下去
-         */
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            combinationSum_dfs(0, candidates, target, new ArrayList());
+            return result;
+        }
+
+        public void combinationSum_dfs(int index, int[] candidates, int target, List<Integer> list) {
+            if (index == candidates.length) return;
+            if (target == 0) {
+                result.add(new ArrayList(list));
+                return;
+            }
+
+            for (int i = index; i < candidates.length; i++) {
+                list.add(candidates[i]);
+                if (target - candidates[i] >= 0) combinationSum_dfs(i, candidates, target - candidates[i], list);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+
+    /**
+     * test2
+     * 優化:
+     * 但時間沒有比較好
+     * 因為上面的做法無法做到提前結束
+     * 所以將 void 改成 int 去判斷是否要提早結束
+     * 例如[2, 2, 2, 2] 已經知道 too big，但 [2, 2, 2, 3] 也會繼續算，所以當 too big 就 return -1 並且讓 for 提早結束
+     */
+//    class Solution {
 //        public List<List<Integer>> combinationSum(int[] candidates, int target) {
 //            List<List<Integer>> result = new ArrayList();
-//            Arrays.sort(candidates); // 排序後若 sum 大於 traget 後面就不用再算
-//            backtrack(candidates, target, result, new ArrayList<>(), 0);
+//            // make sure that a candidates is sorted
+//            Arrays.sort(candidates);
+//            backtrack(0, 0, result, new ArrayList<Integer>(), target, candidates);
 //
 //            return result;
 //        }
 //
-//        private void backtrack(int[] candidates, int remain, List<List<Integer>> result, List<Integer> tempList, int start) {
-//            if (remain < 0) {
-//                return;
-//            } else if (remain == 0) {
-//                result.add(new ArrayList<>(tempList)); // why is here need new, because we need to continue using the templist
-//                return;
+//        private Integer backtrack(int index, int sumOfTempList, List<List<Integer>> result, ArrayList<Integer> tempList, int target, int[] candidates) {
+//            if (sumOfTempList > target) {
+//                // too big
+//                return -1;
+//            } else if (sumOfTempList == target) {
+//                result.add(new ArrayList<>(tempList));
 //            } else {
-//                for (int i = start; i < candidates.length; i++) {
+//                for (int i = index; i < candidates.length; i++) {
 //                    tempList.add(candidates[i]);
-//                    backtrack(candidates, remain - candidates[i], result, tempList, i);  // not i + 1 because we can reuse same elements
+//                    int state = backtrack(i, sumOfTempList + candidates[i], result, tempList, target, candidates);
+//                    if (state == -1) {
+//                        tempList.remove(tempList.size() - 1);
+//                        break;
+//                    }
 //                    tempList.remove(tempList.size() - 1);
 //                }
 //            }
+//            return 0;
 //        }
-//
-//        private void printTempList(List<Integer> list) {
-//            System.out.print("第" + count++ + "次: ");
-//            for (int num : list) {
-//                System.out.print(num + " ");
-//            }
-//            System.out.println();
-//        }
-
-        /**
-         * test2
-         * 優化:
-         * 因為上面的做法無法做到提前結束
-         * 所以將 void 改成 int 去判斷是否要提早結束
-         * 例如[2, 2, 2, 2] 已經知道 too big，但 [2, 2, 2, 3] 也會繼續算，所以當 too big 就 return -1 並且讓 for 提早結束
-         */
-        public List<List<Integer>> combinationSum(int[] candidates, int target) {
-            List<List<Integer>> result = new ArrayList();
-            // make sure that a candidates is sorted
-            Arrays.sort(candidates);
-            backtrack(0, 0, result, new ArrayList<Integer>(), target, candidates);
-
-            return result;
-        }
-
-        private Integer backtrack(int index, int sumOfTempList, List<List<Integer>> result, ArrayList<Integer> tempList, int target, int[] candidates) {
-            if (sumOfTempList > target) {
-                // too big
-                return -1;
-            } else if (sumOfTempList == target) {
-                result.add(new ArrayList<>(tempList));
-            } else {
-                for (int i = index; i < candidates.length; i++) {
-                    tempList.add(candidates[i]);
-                    int state = backtrack(i, sumOfTempList + candidates[i], result, tempList, target, candidates);
-                    if (state == -1) {
-                        tempList.remove(tempList.size() - 1);
-                        break;
-                    }
-                    tempList.remove(tempList.size() - 1);
-                }
-            }
-            return 0;
-        }
-    }
+//    }
 }

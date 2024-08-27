@@ -21,27 +21,7 @@ public class Is_Subsequence_392 {
 
     class Solution {
         /**
-         * Runtime: 2 ms, Beats 60.94%
-         * test1
-         * 解法:
-         * 使用 index 當左 s 的 index
-         * 去比較 t 的內容，如果一樣 index++，最後看 index 是否達到 s.length
-         */
-//        public boolean isSubsequence(String s, String t) {
-//            if (s.length() == 0) return true;
-//            int index = 0;
-//            for (int i = 0; i < t.length(); i++) {
-//                if (s.charAt(index) == t.charAt(i)) {
-//                    index++;
-//                }
-//                if(index == s.length()) return true;
-//            }
-//            return false;
-//        }
-
-        /**
          * Runtime: 0 ms, Beats 100.00%
-         * test2
          * 優化:
          * 使用 char[] 會比 charAt 還快，雖然 charAt 底層也是去抓 value[index]
          * <p>
@@ -51,14 +31,15 @@ public class Is_Subsequence_392 {
          * 另外把第二個 if 寫在裡面會比單獨寫在外面好，因為有++的時候才要判斷
          */
         public boolean isSubsequence(String s, String t) {
-            if (s.length() == 0) return true;
-            char[] charS = s.toCharArray();
-            char[] charT = t.toCharArray();
-            int index = 0;
+            if (s.equals(t) || s.length() == 0)
+                return true;
+            char[] charS = s.toCharArray(), charT = t.toCharArray();
+            int indexS = 0;
             for (char c : charT) {
-                if (charS[index] == c) {
-                    index++;
-                    if (index == s.length()) return true;
+                if (c == charS[indexS]) {
+                    indexS++;
+                    if (indexS == charS.length)
+                        return true;
                 }
             }
             return false;

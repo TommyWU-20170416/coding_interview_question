@@ -78,6 +78,8 @@ public class Sort_Colors_75 {
          * 使用三個指標
          * low, mid, high
          * 初始化位置 low(0), mid(0), high(最後)
+         * low 都是放最小的、high 都放最大
+         *
          * 當 mid == 0 將 nums[low] 和 nums[mid] 交換，並遞增 low 和 mid
          * 當 mid == 1 已經在正確位置，僅遞增 mid
          * 當 mid == 2 將 nums[mid] 和 nums[high] 交換，並遞減 high

@@ -22,30 +22,30 @@ public class Maximum_Number_Of_Vowels_In_A_Substring_Of_Given_Length_1456 {
 
     class Solution {
         /**
-         * test1
+         * Runtime: 5 ms, Beats 99.32%
          * 解法:
          * 1. 建立一個 aeiou 等於 1，提供之後加減使用
          * 2. 當加到 k 數後，開始比大小
          */
-//        public int maxVowels(String s, int k) {
-//            int[] vowels = new int[128];
-//            vowels['a'] = vowels['e'] = vowels['i'] = vowels['o'] = vowels['u'] = 1;
-//
-//            int windowStart = 0, windowCountTmp = 0, windowCount = 0;
-//            char[] chars = s.toCharArray();
-//            for (int i = 0; i < chars.length; i++) {
-//                windowCountTmp += vowels[chars[i]];
-//                if (i >= k - 1) {
-//                    windowCount = Math.max(windowCountTmp, windowCount);
-//                    windowCountTmp -= vowels[chars[windowStart++]];
-//                }
-//            }
-//            return windowCount;
-//        }
+        private int[] isVowel = new int['z' + 1];
+
+        public int maxVowels(String s, int k) {
+            isVowel['a'] = isVowel['e'] = isVowel['i'] = isVowel['o'] = isVowel['u'] = 1;
+
+            char[] charS = s.toCharArray();
+            int count = 0, maxCount = 0;
+            for (int i = 0; i < charS.length; i++) {
+                count += isVowel[charS[i]];
+                if (i >= k - 1) {
+                    maxCount = Math.max(maxCount, count);
+                    count -= isVowel[charS[i - k + 1]];
+                }
+            }
+            return maxCount;
+        }
 
         /**
-         * test2
-         * 解法:
+         * Runtime: 4 ms, Beats: 99.68%
          * 他先把前面 k 算完
          * 接著再往後去算，很酷的地方在
          * current += alphabet[str[j++]];
@@ -76,20 +76,5 @@ public class Maximum_Number_Of_Vowels_In_A_Substring_Of_Given_Length_1456 {
 //
 //            return max;
 //        }
-        public int maxVowels(String s, int k) {
-            int[] vowels = new int[123];// 0-122
-            vowels['a'] = vowels['e'] = vowels['i'] = vowels['o'] = vowels['u'] = 1;
-            int start = 0, sum = 0, count = 0;
-            char[] chars = s.toCharArray();
-
-            for (int end = 0; end < chars.length; end++) {
-                sum += vowels[chars[end]];
-                if (end - start + 1 == k) {
-                    count = Math.max(count, sum);
-                    sum -= vowels[chars[start++]];
-                }
-            }
-            return count;
-        }
     }
 }

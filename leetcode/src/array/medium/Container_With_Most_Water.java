@@ -17,34 +17,6 @@ public class Container_With_Most_Water {
     }
 
     /**
-     * time:O(n^2) space:O(1)
-     *
-     * @param height
-     * @return
-     */
-//    public static int maxArea(int[] height) {
-//        int sizeOfheight = height.length;
-//        int area = 0;
-//        for (int i = 0; i < sizeOfheight; i++) {
-//            for (int j = i + 1; j < sizeOfheight; j++) {
-//                int length = j - i;
-//
-//                System.out.print("[A" + i + j + "]*" + length + "=" + minVerticalLine(height[i], height[j]) * length + " ");
-//                if (area < minVerticalLine(height[i], height[j]) * length) {
-//                    area = minVerticalLine(height[i], height[j]) * length;
-//                }
-//            }
-//            System.out.println();
-//        }
-//        return area;
-//    }
-//
-//    public static int minVerticalLine(int a, int b) {
-//        return (a > b) ? b : a;
-//    }
-//
-
-    /**
      * Runtime: 2 ms, Beats 98.70%
      * 如果接下來的高度沒有比現在高，其實沒有計算的必要，可以減少
      */
