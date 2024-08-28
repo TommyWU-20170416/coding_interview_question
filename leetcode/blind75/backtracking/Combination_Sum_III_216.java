@@ -14,33 +14,32 @@ public class Combination_Sum_III_216 {
     public static void main(String[] args) {
         Combination_Sum_III_216 s = new Combination_Sum_III_216();
         Combination_Sum_III_216.Solution solution = s.new Solution();
-//        int k = 3, n = 9;
-        int k = 9, n = 45;
+        int k = 3, n = 9;
+//        int k = 9, n = 45;
         List<List<Integer>> result = solution.combinationSum3(k, n);
         System.out.print(result);
     }
 
     class Solution {
-        public List<List<Integer>> combinationSum3(int k, int n) {
-            List<List<Integer>> result = new ArrayList<>();
-            backtrack(result, new ArrayList<Integer>(), k, n, 1);
+        private List<List<Integer>> result = new ArrayList<>();
 
+        public List<List<Integer>> combinationSum3(int k, int n) {
+            dfs(k, n, 1, new ArrayList<Integer>());
             return result;
         }
 
-        private void backtrack(List<List<Integer>> result, ArrayList<Integer> tempList, int k, int remain, int index) {
-            if (tempList.size() == k && remain == 0) {
-                result.add(new ArrayList<>(tempList));
-                return;
-            }
-            for (int i = index; i < 10; i++) {
-                if (tempList.size() == k) {
-                    break;
+        private void dfs(int k, int n, int index, List<Integer> list) {
+            if (k == 0) {
+                if (n != 0) return;
+                else {
+                    result.add(new ArrayList<>(list));
                 }
+            }
 
-                tempList.add(i);
-                backtrack(result, tempList, k, remain - i, i + 1);
-                tempList.remove(tempList.size() - 1);
+            for (int i = index; i < 10; i++) {
+                list.add(i);
+                dfs(k - 1, n - i, i + 1, list);
+                list.remove(list.size() - 1);
             }
         }
     }

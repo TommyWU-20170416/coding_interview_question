@@ -19,7 +19,7 @@ public class N_th_Tribonacci_Number_1137 {
 
     class Solution {
         /**
-         * test1
+         * Runtime: 0 ms, Beats 100.00%
          * 解法:
          * 使用跟 fib 一樣的方式並且每一個解都用 memo 紀錄
          */

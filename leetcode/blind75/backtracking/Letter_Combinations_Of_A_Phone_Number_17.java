@@ -23,54 +23,7 @@ public class Letter_Combinations_Of_A_Phone_Number_17 {
     }
 
     /**
-     * test1
-     * 解法:
-     * 使用 hashmap 搭配 recursive
-     */
-//    class Solution {
-//        private Map<Character, String> phoneMap = new HashMap<>();
-//
-//        public List<String> letterCombinations(String digits) {
-//            phoneMap.put('2', "abc");
-//            phoneMap.put('3', "def");
-//            phoneMap.put('4', "ghi");
-//            phoneMap.put('5', "jkl");
-//            phoneMap.put('6', "mno");
-//            phoneMap.put('7', "pqrs");
-//            phoneMap.put('8', "tuv");
-//            phoneMap.put('9', "wxyz");
-//
-//            List<String> result = new ArrayList<>();
-//            if (digits == null || digits.length() == 0) return result;
-//            backtrack(result, new StringBuilder(), digits, 0);
-//
-//            return result;
-//        }
-//
-//        /**
-//         * @param result
-//         * @param current
-//         * @param digits
-//         * @param index   to check the vocabulary length
-//         */
-//        private void backtrack(List<String> result, StringBuilder current, String digits, int index) {
-//            if (index == digits.length()) {
-//                result.add(current.toString());
-//                return;
-//            }
-//
-//            char digit = digits.charAt(index);
-//            String letter = phoneMap.get(digit);
-//            for (int i = 0; i < letter.length(); i++) {
-//                current.append(letter.charAt(i));
-//                backtrack(result, current, digits, index + 1);
-//                current.deleteCharAt(current.length() - 1);
-//            }
-//        }
-//    }
-
-    /**
-     * test2
+     *
      * 解法:
      * 優化 map 裡面儲存的內容，提高效率
      */

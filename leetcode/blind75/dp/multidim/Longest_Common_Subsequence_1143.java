@@ -20,34 +20,12 @@ public class Longest_Common_Subsequence_1143 {
 
     class Solution {
         /**
-         * test1
-         * 解法:
-         * 比對每個字元，如果有相同就 ++
-         * 如果不相同就找 同列或同欄 最大值，紀錄下去
-         */
-//        public int longestCommonSubsequence(String text1, String text2) {
-//            int strLen1 = text1.length();
-//            int text2.length = text2.length();
-//            int[][] dp = new int[strLen1 + 1][text2.length + 1];
-//
-//            for (int i = 1; i <= strLen1; i++) {
-//                char c1 = text1.charAt(i - 1);
-//                for (int j = 1; j <= text2.length; j++) {
-//                    char c2 = text2.charAt(j - 1);
-//                    if (c1 == c2) {
-//                        dp[i][j] = dp[i - 1][j - 1] + 1;
-//                    } else {
-//                        dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
-//                    }
-//                }
-//            }
-//            return dp[strLen1][text2.length];
-//        }
-
-        /**
-         * test2
+         * Runtime: 8 ms, Beats 99.27%
          * 優化:
          * 因為是 charAt 所以可用 toCharArray() 取代提高效率
+         * 主要利用 dp 去跑每一種可能，如果今天值不一樣，就延續上一個最大值 Math.max(dp[i - 1][j], dp[i][j - 1])
+         * 如果一樣 chars1[i - 1] == chars2[j - 1]，就要把 dp[i][j] = dp[i - 1][j - 1] + 1 意義是當前的值是由上一個值 + 1
+         * 可以想像成 chars1[i - 1] 跟 chars2[j - 1] 做比較，因為字元一樣所以放到 dp[i][j]
          */
         public int longestCommonSubsequence(String text1, String text2) {
             char[] chars1 = text1.toCharArray();
