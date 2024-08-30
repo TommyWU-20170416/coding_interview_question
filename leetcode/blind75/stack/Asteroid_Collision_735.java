@@ -24,56 +24,56 @@ public class Asteroid_Collision_735 {
         System.out.println();
     }
 
-    /**
-     * tset1
-     * 解法:
-     * 一開始知道 stack > 0 且 num < 0 代表有衝突，要解掉
-     * 衝突就是 + -
-     * 三種情況
-     * => 大+ 小-
-     * 小- 不 push 繼續往右看
-     * <p>
-     * => 中+ 中-
-     * 兩者抵銷，抵銷只會做一次，所以放到最後再檢查
-     * <p>
-     * => 小+ 大-
-     * 小+ pop，繼續往左找比 大- 還大的，這個有可能會持續性的發生，所以先做
-     */
-
     class Solution {
-        //        public int[] asteroidCollision(int[] asteroids) {
-//            Stack<Integer> stack = new Stack<>();
+        /**
+         * Runtime: 8 ms, Beats 20.07%
+         * 解法:
+         * 衝突就是 + -
+         * 三種情況
+         * => 大+ 小-
+         * 不 push 繼續往右看
+         * <p>
+         * => 中+ 中-
+         * 兩者抵銷，抵銷只會做一次，所以放到最後再檢查
+         * <p>
+         * => 小+ 大-
+         * pop，繼續往左找比 大- 還大的，這個有可能會持續性的發生，所以先做
+         */
+//        public int[] asteroidCollision(int[] asteroids) {
+//            // 使用 stack 去存
+//            Stack<Integer> stack = new Stack();
 //
 //            for (int num : asteroids) {
-//                if (num > 0) {
+//                // 小+ 大- 可能要一直 pop 直到找到更大的
+//                // 如果當前 peek 是負的，拿去跟 -num 比較，就會變成拿負的跟正的比較(-num變正)
+//                while (!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -num) {
+//                    stack.pop();
+//                }
+//                // 可能 pop 到沒有 || 之前 peek 已經是負，現在也是負
+//                if (stack.isEmpty() || num > 0 || stack.peek() < 0) {
 //                    stack.push(num);
-//                } else {
-//                    while (!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -num) {
-//                        stack.pop();
-//                    }
-//                    if (stack.isEmpty() || stack.peek() < 0) {
-//                        stack.push(num);
-//                    }
-//                    if (stack.peek() == -num) {
-//                        stack.pop();
-//                    }
+//                }
+//                // 中+ 中- 會抵消
+//                if (stack.peek() == -num) {
+//                    stack.pop();
 //                }
 //            }
 //
-//            int[] res = new int[stack.size()];
-//            int i = stack.size() - 1;
-//            while (!stack.isEmpty()) {
-//                res[i--] = stack.pop();
+//            // output stack
+//            int[] result = new int[stack.size()];
+//            for (int i = 0; i < stack.size(); i++) {
+//                result[i] = stack.get(i);
 //            }
-//
-//            return res;
+//            return result;
 //        }
 
         /**
-         * test2
+         * Runtime: 1 ms, Beats 100.00%
          * 解法
          * 使用 array + index 取代 stack 功能
-         * index 像是 stack.peek() 的指標
+         * stack.pop() => index--
+         * stack.isEmpty() => index == 0
+         * stack.peek() => asteroids[index - 1]
          */
         public int[] asteroidCollision(int[] asteroids) {
             int n = asteroids.length;

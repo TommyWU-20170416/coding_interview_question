@@ -11,11 +11,13 @@ import java.util.Stack;
  */
 public class Decode_String_394 {
     public static void main(String[] args) {
-        Decode_String_394 s = new Decode_String_394();
-        Decode_String_394.Solution solution = s.new Solution();
+        Decode_String_394 ss = new Decode_String_394();
+        Decode_String_394.Solution solution = ss.new Solution();
 
-        String str = "3[a]2[bc]";
-        String result = solution.decodeString(str);
+//        String s = "3[a]2[bc]"; // Output: "aaabcbc"
+        String s = "3[a2[c]]"; // Output: "accaccacc"
+
+        String result = solution.decodeString(s);
         System.out.print(result);
         System.out.println();
 
@@ -23,17 +25,16 @@ public class Decode_String_394 {
 
     class Solution {
         /**
-         * test1
+         * Runtime: 0 ms, Beats 100.00%
          * 解法
          * 1. 遇到數字，記錄數字
-         * 2. 遇到"["，記錄前面遇到的數字以及英文字，紀錄後要初始化
-         * 3. 遇到"]"，紀錄先前記憶的 sb + stack.pop 出來的
-         * EX: 做到 bc 後的 ']' 時，sb = "bc"，然後 stack_string 的 aaa + bc
+         * 2. 遇到"["，記錄前面遇到的數字以及英文字，紀錄後要初始化。 因為遇到 "[" 代表要處理後面的東西了，所以都先記錄起來
+         * 3. 遇到"]"，處理先前記憶的 sb + stackString.pop 出來的。 sb 是從"["到"]"之間的字母，他要跟 stackString.pop 出來的字母做多次組合
          * 4. 遇到字母，紀錄字母
          */
         public String decodeString(String s) {
-            Stack<Integer> stack_integer = new Stack<>();
-            Stack<StringBuilder> stack_string = new Stack<>();
+            Stack<Integer> stackInteger = new Stack<>();
+            Stack<StringBuilder> stackString = new Stack<>();
             StringBuilder sb = new StringBuilder();
             int n = 0;
 
@@ -42,14 +43,14 @@ public class Decode_String_394 {
                 if (Character.isDigit(c)) {
                     n = n * 10 + (c - '0');// 字符數字轉換為對應的整數 '0' = 48
                 } else if (c == '[') {
-                    stack_integer.push(n);
+                    stackInteger.push(n);
                     n = 0;
-                    stack_string.push(sb);
+                    stackString.push(sb);
                     sb = new StringBuilder();
                 } else if (c == ']') {
-                    int k = stack_integer.pop();
+                    int k = stackInteger.pop();
                     String tmp = sb.toString();
-                    sb = stack_string.pop();
+                    sb = stackString.pop();
                     while (k-- > 0) {
                         sb.append(tmp);
                     }
