@@ -50,37 +50,30 @@ public class Odd_Even_Linked_List_328 {
          * oddTmp.next = evenTmp.next; 使得跳脫條件要檢查 evenTmp 位置
          * 如果是偶數個，因為偶數會先跑到最後，所以也要檢查 evenTmp.next         *
          */
+//        public ListNode oddEvenList(ListNode head) {
+//            if (head == null     || head.next == null) return head;
+//            ListNode oddTmp = head, evenTmp = head.next;
+//            ListNode oddHead = oddTmp, evenHead = evenTmp;
+//            while (evenTmp != null && evenTmp.next != null) {
+//                oddTmp.next = evenTmp.next;
+//                oddTmp = oddTmp.next;
+//                evenTmp.next = oddTmp.next;
+//                evenTmp = evenTmp.next;
+//            }
+//            oddTmp.next = evenHead;
+//            return oddHead;
+//        }
         public ListNode oddEvenList(ListNode head) {
-            if (head == null     || head.next == null) return head;
-            ListNode oddTmp = head, evenTmp = head.next;
-            ListNode oddHead = oddTmp, evenHead = evenTmp;
+            ListNode odd = head, oddTmp = odd;
+            ListNode even = head.next, evenTmp = even;
             while (evenTmp != null && evenTmp.next != null) {
-                oddTmp.next = evenTmp.next;
+                oddTmp.next = oddTmp.next.next;
                 oddTmp = oddTmp.next;
-                evenTmp.next = oddTmp.next;
+                evenTmp.next = evenTmp.next.next;
                 evenTmp = evenTmp.next;
             }
-            oddTmp.next = evenHead;
-            return oddHead;
+            oddTmp.next = even;
+            return odd;
         }
-//        public ListNode oddEvenList(ListNode head) {
-//            if (head == null) return null;
-//            else if (head.next == null || head.next.next == null) return head;
-//
-//            ListNode odd = new ListNode(head.val), even = new ListNode(head.next.val);
-//            ListNode oddTmp = odd, evenTmp = even;
-//            head = head.next.next;
-//            while (head != null) {
-//                oddTmp.next = new ListNode(head.val);
-//                oddTmp = oddTmp.next;
-//                head = head.next;
-//                if(head == null) break;
-//                evenTmp.next = new ListNode(head.val);
-//                evenTmp = evenTmp.next;
-//                head = head.next;
-//            }
-//            oddTmp.next = even;
-//            return odd;
-//        }
     }
 }

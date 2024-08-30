@@ -25,19 +25,37 @@ public class Reverse_Linked_List_206 {
          * test1
          * 解法:
          * 一個個建立並在放回到起首位置
+         * 這樣寫 空間複雜度會是 O(N)，因為每一個點都要額外 new 出來
+         */
+//        public ListNode reverseList(ListNode head) {
+//            if (head == null)
+//                return null;
+//            ListNode result = new ListNode(head.val);
+//            head = head.next;
+//            while (head != null) {
+//                ListNode tmp = new ListNode(head.val);
+//                tmp.next = result;
+//                result = tmp;
+//                head = head.next;
+//            }
+//            return result;
+//        }
+
+        /**
+         * Runtime: 0 ms, Beats 100.00%
+         * 這樣寫空間複雜度變成 O(1)
+         * 因為只是改變指標的指向
          */
         public ListNode reverseList(ListNode head) {
-            if (head == null)
-                return null;
-            ListNode result = new ListNode(head.val);
-            head = head.next;
-            while (head != null) {
-                ListNode tmp = new ListNode(head.val);
-                tmp.next = result;
-                result = tmp;
-                head = head.next;
+            ListNode prev = null;
+            ListNode temp = head;
+            while(temp!= null){
+                ListNode front = temp.next;
+                temp.next = prev;
+                prev = temp;
+                temp = front;
             }
-            return result;
+            return prev;
         }
     }
 }

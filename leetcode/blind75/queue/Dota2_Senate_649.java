@@ -21,6 +21,13 @@ public class Dota2_Senate_649 {
 
 
     class Solution {
+        /**
+         * Runtime: 10 ms, Beats 88.68%
+         * 解法:
+         * 把 Radiant 跟 Dire 分別記錄 index 到 queue 內
+         * 接著 poll 出來，只要比較小的代表可以把對方 ban 掉，ban 掉後再自己的 queue 新增一組，表示下一輪還可以繼續做
+         * 最後看 誰空掉誰就輸
+         */
         public String predictPartyVictory(String senate) {
             Queue<Integer> rad = new ArrayDeque<>(), dir = new ArrayDeque<>();
             int end = senate.length();

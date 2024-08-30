@@ -35,7 +35,7 @@ public class Number_of_Recent_Calls_933 {
 class RecentCounter {
 
     /**
-     * test1
+     * Runtime: 2326 ms, Beats 5.01%
      * 解法:
      * 使用 queue 去紀錄內部
      */
@@ -61,7 +61,7 @@ class RecentCounter {
 //    }
 
     /**
-     * test2
+     * Runtime: 17 ms, Beats 99.86%
      * 使用陣列紀錄
      */
     private int[] request = new int[10000];
@@ -74,10 +74,11 @@ class RecentCounter {
     }
 
     public int ping(int t) {
-        // start 超過 end 會發散，因為 request 的 end 後面都是 0 ，相減後也不會 < 3000
-        // start <= end 也會錯誤，若 start = end 會讓 start 前進到準備要放值的下一個位置，這樣當 end - start = 0就不對了
-        //      意思就是當 end = 2，因為 start 可以做到 2 ，然後 條件成立(start <= end)，因此 start++ 也就跑到下一個位置 3 去了
-        while (start <= end && t - request[start] > 3000) {
+        // 這個 while 會找出 start ~ end 範圍是 3000 的
+        // 如果不添加 start < end 有可能 start 一直都找不到比 t - 3000 大的
+        // 如果 request 內有 642, 1849 此時 t = 4921，如果不添加 start < end
+        // t - 3000 = 1921，start就會一直 ++ 直到超過 1921，但這樣就會 indexOutOfBound
+        while (start < end && t - 3000 > request[start]) {
             start++;
         }
 

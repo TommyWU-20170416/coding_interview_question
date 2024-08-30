@@ -16,7 +16,7 @@ public class Unique_Number_Of_Occurrences_1207 {
 
     class Solution {
         /**
-         * test1
+         * Runtime: 2 ms, Beats 98.14%
          * 解法:
          * 先遍歷一遍所有的值出現的次數，儲存到 map: [1,3] ，1出現3次
          * 接著再次遍歷一遍，檢查當前出現的次數是否有出現在 set 中，如果有，在 set add 的時候會 return false

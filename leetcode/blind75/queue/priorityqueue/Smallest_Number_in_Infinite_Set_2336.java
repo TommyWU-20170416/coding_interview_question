@@ -4,7 +4,7 @@ import java.util.PrimitiveIterator;
 import java.util.PriorityQueue;
 
 /**
- * XXX.https://leetcode.com/problems/xxxxxxx
+ * 2336.https://leetcode.com/problems/smallest-number-in-infinite-set/description/?envType=study-plan-v2&envId=leetcode-75
  *
  * @author AaronWU
  * @created 創建時間：2024/06/19 14:40:51
