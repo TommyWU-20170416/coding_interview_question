@@ -19,35 +19,9 @@ public class Daily_Temperatures {
 
     public static void main(String[] args) {
         Daily_Temperatures test = new Daily_Temperatures();
-        printArray(test.dailyTemperatures(temperature));
+        int[] result = test.dailyTemperatures(temperature);
+        System.out.println(result);
     }
-
-    /**
-     * tset1
-     * 解法:
-     * 使用 map 去紀錄每個座標，以及比該座標還大多少的位置
-     * 由前往後算，stack 會儲存由大到小
-     *
-     * 最後再把 stack 的值放到 result 內，所以會多做一組 O(n)
-     * Runtime: 86 ms, Beats 9.22%
-     */
-//    public int[] dailyTemperatures(int[] temperatures) {
-//        Map<Integer, Integer> nextGreater = new HashMap<>();
-//        Deque<Integer> stack = new ArrayDeque<>();
-//
-//        for (int i = 0; i < temperatures.length; i++) {
-//            while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
-//                int a = stack.pop();
-//                nextGreater.put(a, i - a);
-//            }
-//            stack.push(i);
-//        }
-//        int[] result = new int[temperatures.length];
-//        for (int i = 0; i < temperatures.length; i++) {
-//            result[i] = nextGreater.getOrDefault(i, 0);
-//        }
-//        return result;
-//    }
 
     /**
      * test2
@@ -72,8 +46,13 @@ public class Daily_Temperatures {
     /**
      * test3
      * Runtime: 6ms, Beats 100.00%
-     * 使用 hottest 紀錄最熱的那一天
+     * 使用 hottest 紀錄最熱的那一天，如果當天溫度比 hottest 還高，就更新 hottest，且因為他是最熱的，所以 ans[i] = 0 找不到比他更熱的
      * 使用 while 一個個 比較
+     * ans 可以看成是一個相對的座標，以 {72, 70, 69, 68, 78} 來看，會得到 [4, 3, 2, 1, 0]
+     * 以 72 來講就是要到第 4 位 是比我更熱的
+     * 再拆解來看
+     * 72 後面的 70 比我小，代表我要的溫度在他之後，所以我就是把 70 找到的座標(index: 1)再加上(3)，我就可以直接去找(78)這溫度做比較
+     * 不用一個個做比對
      */
     public int[] dailyTemperatures(int[] temperatures) {
         int n = temperatures.length;
@@ -84,22 +63,14 @@ public class Daily_Temperatures {
             if (temperatures[i] >= hottest) {
                 hottest = temperatures[i];
             } else {
-                int it = i + 1;
-                while (temperatures[it] <= temperatures[i]) {
-                    it += ans[it];
+                int afterIndex = i + 1;
+                while (temperatures[i] >= temperatures[afterIndex]) {
+                    afterIndex += ans[afterIndex];
                 }
-                ans[i] = it - i;
+                ans[i] = afterIndex - i;
             }
         }
 
         return ans;
-    }
-
-
-    public static void printArray(int[] num) {
-        System.out.print("i: ");
-        for (int i : num) {
-            System.out.print(i + " ");
-        }
     }
 }
