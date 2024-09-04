@@ -50,7 +50,6 @@ public class Rotting_Oranges_994 {
 //                    for (int[] direction : directions) {
 //                        int newX = x + direction[0], newY = y + direction[1];
 //                        if (0 <= newX && newX < rows && 0 <= newY && newY < cols && grid[newX][newY] == 1) {
-//                            System.out.println("newX: " + newX + ", newY: " + newY);
 //                            count--;
 //                            grid[newX][newY] = 2;
 //                            queue.offer(new int[]{newX, newY});
