@@ -35,9 +35,11 @@ public class Delete_Node_In_A_BST_450 {
          * - 2   4 X  7
          */
         TreeNode t = new TreeNode(5, new TreeNode(3, new TreeNode(2), new TreeNode(4)), new TreeNode(6, null, new TreeNode(7)));
-        int val = 3;
+//        int key = 3; // 測試 當 key 底下 left right 都有值
+//        int key = 6; // 測試 當 key 底下只有 right
+        int key = 2; // 測試 當 key 底下什麼都沒有
 
-        TreeNode result = solution.deleteNode(t, val);
+        TreeNode result = solution.deleteNode(t, key);
 
         System.out.println(result);
     }

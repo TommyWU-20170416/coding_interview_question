@@ -29,37 +29,8 @@ public class Search_In_A_Binary_Search_Tree_700 {
     }
 
     class Solution {
-
         /**
-         * test1
-         * 解法:
-         * 這樣寫是採用 DFS 下去找，如果有找到就 return
-         * 但缺點是沒有利用到 BST 的優點
-         */
-//        public TreeNode searchBST(TreeNode root, int val) {
-//            TreeNode result = searchBST_helper(root, val);
-//            return result;
-//        }
-//
-//        private TreeNode searchBST_helper(TreeNode node, int target) {
-//            if (node == null)
-//                return null;
-//
-//            TreeNode result = null;
-//            if (node.val == target) {
-//                result = node;
-//            }
-//
-//            if (result == null)
-//                result = searchBST_helper(node.left, target);
-//            if (result == null)
-//                result = searchBST_helper(node.right, target);
-//
-//            return result;
-//        }
-
-        /**
-         * test2
+         * Runtime: 0 ms, Beats 100.00%
          * 解法:
          * BST 優點是左小右大
          * 可以比較當前的數值去決定要左邊還是右邊
