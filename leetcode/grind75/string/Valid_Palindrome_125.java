@@ -54,32 +54,36 @@ public class Valid_Palindrome_125 {
          * 比較明顯的差異是使用 Character.isDigit 跟 Character.isAlphabetic 還是比手刻還慢
          */
         public boolean isPalindrome(String s) {
-            int right = s.length() - 1;
-            int left = 0;
+            int left = 0, right = s.length() - 1;
             while (left < right) {
-                char leftChar = toLowercase(s.charAt(left));
-                char rightChar = toLowercase(s.charAt(right));
-                if (!isValid(leftChar)) {
-                    left++;
-                } else if (!isValid(rightChar)) {
-                    right--;
-                } else if (leftChar != rightChar) {
-                    return false;
-                } else {
-                    right--;
+                while (left < right && !isValid(s.charAt(left))) {
                     left++;
                 }
+                while (left < right && !isValid(s.charAt(right))) {
+                    right--;
+                }
+                char leftChar = toLowerCase(s.charAt(left)), rightChar = toLowerCase(s.charAt(right));
+                if (leftChar != rightChar) {
+                    return false;
+                }
+                left++;
+                right--;
             }
             return true;
         }
 
-        private char toLowercase(char c) {
-            if (c >= 'A' && c <= 'Z') return (char) ('a' + (c - 'A'));
-            else return c;
+        private boolean isValid(char c) {
+            if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9')) {
+                return true;
+            }
+            return false;
         }
 
-        private boolean isValid(char c) {
-            return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
+        private char toLowerCase(char c) {
+            if ('A' <= c && c <= 'Z') {
+                return (char) ('a' + (c - 'A'));
+            }
+            return c;
         }
     }
 }
