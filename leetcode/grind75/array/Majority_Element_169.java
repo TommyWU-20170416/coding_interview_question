@@ -15,7 +15,8 @@ public class Majority_Element_169 {
         Majority_Element_169 ss = new Majority_Element_169();
         Majority_Element_169.Solution solution = ss.new Solution();
 //        int[] nums = {2, 2, 1, 1, 1, 2, 2};
-        int[] nums = {3, 3, 3, 2, 2, 2, 2, 2, 2, 3, 3};
+//        int[] nums = {3, 3, 3, 2, 2, 2, 2, 2, 2, 3, 3};
+        int[] nums = {5, 1, 5, 2, 5, 3, 4, 5};
         int result = solution.majorityElement(nums);
         System.out.print(result);
     }

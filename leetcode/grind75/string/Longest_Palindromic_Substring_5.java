@@ -1,5 +1,8 @@
 package string;
 
+
+import java.util.Vector;
+
 /**
  * 5.https://leetcode.com/problems/longest-palindromic-substring/description/
  *
@@ -11,8 +14,8 @@ public class Longest_Palindromic_Substring_5 {
     public static void main(String[] args) {
         Longest_Palindromic_Substring_5 ss = new Longest_Palindromic_Substring_5();
         Longest_Palindromic_Substring_5.Solution solution = ss.new Solution();
-        String s = "babad";
-//        String s = "cbbd";
+        String s = "dabad";
+//        String s = "cbbc";
         String result = solution.longestPalindrome(s);
         System.out.println("reuslt:" + result);
     }

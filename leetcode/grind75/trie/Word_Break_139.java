@@ -41,8 +41,10 @@ public class Word_Break_139 {
     public static void main(String[] args) {
         Word_Break_139 ss = new Word_Break_139();
         Word_Break_139.Solution solution = ss.new Solution();
-        String s = "catsanddog";
-        String[] wordDict = {"cats", "dog", "sand", "and", "cat"};
+        String s = "cars";
+        String[] wordDict = {"car", "ca", "rs"};
+//        String s = "catsandog";
+//        String[] wordDict = {"cats", "dog", "sand", "and", "cat"};
 //        String s = "leetcode";
 //        String[] wordDict = {"leet", "code"};
         List<String> l = Arrays.asList(wordDict);
