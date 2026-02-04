@@ -12,10 +12,6 @@ import java.util.Set;
  */
 public class Move_Zeroes {
 
-    public static List<String> list = new ArrayList<String>();
-    public static Set<String> set = new HashSet<>();
-    public static Set<String> sortset = new LinkedHashSet<>();
-
     public static void main(String[] args) {
 
         // Input: nums = [0,1,0,3,12]

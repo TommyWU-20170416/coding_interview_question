@@ -12,10 +12,6 @@ import java.util.Set;
  */
 public class Remove_Duplicates_From_Sorted_Array {
 
-    public static List<String> list = new ArrayList<String>();
-    public static Set<String> set = new HashSet<>();
-    public static Set<String> sortset = new LinkedHashSet<>();
-
     public static void main(String[] args) {
 
         // Input: nums = [1,1,2]
