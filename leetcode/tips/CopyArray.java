@@ -1,8 +1,8 @@
 import java.util.Arrays;
 
 public class CopyArray {
-    static final int NUM_RUNS = 1000; // 运行次数
-    static final int ARRAY_SIZE = 1000; // 数组长度
+    static final int NUM_RUNS = 1000; // 運行數組
+    static final int ARRAY_SIZE = 1000; // 數組長度
 
     public static void main(String[] args) {
 
