@@ -45,6 +45,7 @@ public class Find_The_Index_Of_The_First_Occurrence_In_A_String_Best {
         int j = 0;
         for (int i = 0; i < haystack.length(); i++) {
             while (j > 0 && haystack.charAt(i) != needle.charAt(j)) {
+                // 如果不匹配，依靠 ＬＰＳ表找到下一個可以開始的地方
                 j = lps[j - 1];
             }
 
@@ -52,6 +53,7 @@ public class Find_The_Index_Of_The_First_Occurrence_In_A_String_Best {
                 j++;
             }
 
+            // 如果 j 已經跟 m 都走到最後代表有成功找到
             if (j == m) {
                 return i - m + 1;
             }
